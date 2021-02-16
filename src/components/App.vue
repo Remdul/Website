@@ -5,10 +5,15 @@
       <router-link to="/home" class='heading'>Family Command and Control - FamilyC2</router-link>
       <div class="header-menu">
         <router-link to="/home" class='link'>Home</router-link>
-        <p class='link' v-on:click="signOut" v-if="isAuthenticated">Sign Out</p>
+        <router-link class='link' to="/family" v-if="isAuthenticated">My Family</router-link>
+        <router-link class='link' to="/tasks" v-if="isAuthenticated">Tasks</router-link>
+        <router-link class='link' to="/calendar" v-if="isAuthenticated">Calendar</router-link>
         <router-link class='link' to="/" v-if="!isAuthenticated">Sign In</router-link>
         <router-link class='link' to="/profile" v-if="isAuthenticated">Profile</router-link>
-        <router-link class='link' to="/protected">Protected Route</router-link>
+        <p class='link' v-on:click="signOut" v-if="isAuthenticated">Sign Out</p>
+
+        
+        
       </div>
     </div>
     <router-view></router-view>
