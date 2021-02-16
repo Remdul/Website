@@ -13,6 +13,9 @@ import App from './components/App.vue'
 import Home from './components/Home.vue'
 import Protected from './components/Protected.vue'
 import Profile from './components/Profile.vue'
+import Tasks from './components/Tasks.vue'
+import Family from './components/Family.vue'
+import Calendar from './components/Calendar.vue'
 
 // Vuex store
 import store from './store'
