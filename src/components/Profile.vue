@@ -2,8 +2,6 @@
   <div class='container'>
     <h1>Yo, {{ username }}</h1>
     <p>Here's all your info:</p>
-  </div>
-  <div class='contianer'>
     <p>Username: {{ username }}</p>
     <p>Email: {{ email }}</p>
   </div>
