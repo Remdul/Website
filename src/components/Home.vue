@@ -1,7 +1,7 @@
 <template>
   <div class='container'>
-    <h1>Welcome to your App</h1>
-    <p>Amplify your apps. Build on a flexible, scalable, and reliable serverless backend.</p>
+    <h1>Welcome to Family Command and Control</h1>
+    <p>Control Your Family.</p>
   </div>
 </template>
 

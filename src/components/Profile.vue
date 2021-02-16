@@ -1,7 +1,11 @@
 <template>
   <div class='container'>
     <h1>Yo, {{ username }}</h1>
-    <p>Amplify your apps. Build on a flexible, scalable, and reliable serverless backend.</p>
+    <p>Here's all your info:</p>
+  </div>
+  <div class='contianer'>
+    <p>Username: {{ username }}</p>
+    <p>Email: {{ email }}</p>
   </div>
 </template>
 
@@ -12,6 +16,9 @@ export default {
   computed: {
     username() {
       return this.$store.state.user.username
+    },
+    email() {
+      return this.$store.state.user.email
     }
   }
 }
