@@ -17,7 +17,7 @@
 <script>
 import { API } from 'aws-amplify';
 import { onCreateTask } from '../graphql/mutations';
-import { listTasks } from './graphql/queries';
+import { listTasks } from '../graphql/queries';
 
 
 export default {
