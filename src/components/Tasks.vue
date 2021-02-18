@@ -4,34 +4,56 @@
     <input type="text" v-model="title" placeholder="Task Title">
     <input type="text" v-model="description" placeholder="Task description">
     <button v-on:click="createTask">Create Task</button>
+  
+    <div v-for="item in tasks" :key="item.id">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+    </div>
+
   </div>
 </template>
 
 
 <script>
 import { API } from 'aws-amplify';
-import { createTask } from '../graphql/mutations';
+import { onCreateTask } from '../graphql/mutations';
+import { listTasks } from './graphql/queries';
+
 
 export default {
   name: 'app',
+
+  async created() {
+    this.getTasks();
+    this.subscribe();
+  },
+
   data() {
     return {
       title: '',
-      description: ''
+      description: '',
+      tasks: []
     }
   },
   methods: {
-    async createTask() {
-      const { title, description } = this;
-      if (!title || !description) return;
-      const todo = { title, description };
-      await API.graphql({
-        query: createTask,
-        variables: {input: todo},
+    subscribe() {
+      API.graphql({ query: onCreateTask })
+        .subscribe({
+          next: (eventData) => {
+            let todo = eventData.value.data.onCreateTask;
+            if (this.todos.some(item => item.title === todo.title)) return; // remove duplications
+            this.todos = [...this.todos, todo];
+          }
+        });
+    },
+
+    async getTasks() {
+      const todos = await API.graphql({
+        query: listTasks
       });
-      this.title = '';
-      this.description = '';
+      this.todos = todos.data.listTasks.items;
     }
+
   }
 };
 
