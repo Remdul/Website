@@ -26,9 +26,12 @@ require('./assets/main.css')
 // route configuration
 const routes = [
   { path: '/', component: Auth },
-  { path: '/protected', component: Protected, meta: { requiresAuth: true} },
   { path: '/home', component: Home },
+  { path: '/protected', component: Protected, meta: { requiresAuth: true} },
   { path: '/profile', component: Profile, meta: { requiresAuth: true} },
+  { path: '/tasks', component: Tasks, meta: { requiresAuth: true} },
+  { path: '/family', component: Family, meta: { requiresAuth: true} },
+  { path: '/calendar', component: Calendar, meta: { requiresAuth: true} },
 ]
 
 // router definition

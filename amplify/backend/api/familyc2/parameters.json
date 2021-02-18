@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "familyc2",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authvueauth2d2c6134",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

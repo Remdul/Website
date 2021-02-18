@@ -10,7 +10,7 @@
 <script>
 
 export default {
-  name: 'Tasks',
+  name: 'home',
   computed: {
     username() {
       return this.$store.state.user.username
