@@ -1,25 +1,40 @@
 <template>
-  <div class='container'>
-    <h1>Yo, {{ username }}</h1>
-    <p>Here's all your info:</p>
-    <p>Username: {{ username }}</p>
-    <p>Email: {{ email }}</p>
+  <div id="app">
+    <h1>Tasks</h1>
+    <input type="text" v-model="title" placeholder="Task Title">
+    <input type="text" v-model="description" placeholder="Task description">
+    <button v-on:click="createTask">Create Task</button>
   </div>
 </template>
 
+
 <script>
+import { API } from 'aws-amplify';
+import { createTask } from '../graphql/mutations';
 
 export default {
-  name: 'home',
-  computed: {
-    username() {
-      return this.$store.state.user.username
-    },
-    email() {
-      return this.$store.state.user.email
+  name: 'app',
+  data() {
+    return {
+      title: '',
+      description: ''
+    }
+  },
+  methods: {
+    async createTask() {
+      const { title, description } = this;
+      if (!title || !description) return;
+      const todo = { title, description };
+      await API.graphql({
+        query: createTask,
+        variables: {input: todo},
+      });
+      this.title = '';
+      this.description = '';
     }
   }
-}
+};
+
 </script>
 
 <style scoped>
