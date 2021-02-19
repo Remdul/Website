@@ -49,7 +49,7 @@ export default {
       this.description = '';
     },
 
-    async getTasks() {
+    async listTasks() {
       const todos = await API.graphql({
         query: listTasks
       });
