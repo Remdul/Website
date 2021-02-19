@@ -24,7 +24,7 @@ export default {
   name: 'app',
 
   async created() {
-    this.getTasks();
+    this.listTasks();
   },
 
   data() {
