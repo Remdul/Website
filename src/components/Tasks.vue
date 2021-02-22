@@ -54,6 +54,7 @@ export default {
         query: listTasks
       });
       this.todos = todos.data.listTasks.items;
+      console.log("DEBUG: This Tasks: ", this.todos);
     }
 
   }
