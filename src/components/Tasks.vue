@@ -15,6 +15,7 @@
 
 
 <script>
+
 import { API } from 'aws-amplify';
 import { createTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
@@ -54,7 +55,7 @@ export default {
         query: listTasks
       });
       this.todos = todos.data.listTasks.items;
-      console.log("DEBUG: This Tasks: ", todos.data);
+      console.log("DEBUG: This Tasks: ", this.todos);
     }
 
   }
