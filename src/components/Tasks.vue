@@ -5,7 +5,7 @@
     <input type="text" v-model="description" placeholder="Task description">
     <button v-on:click="createTask">Create Task</button>
   
-    <div v-for="item in tasks" :key="item.id">
+    <div v-for="item in todos" :key="item.id">
       <h3>{{ item.title }}</h3>
       <p>{{ item.description }}</p>
     </div>
