@@ -52,8 +52,9 @@ export default {
       const todos = await API.graphql({
         query: listTasks
       });
-      console.log("TODOS: ", todos);
+      console.log("TODOS 1: ", todos);
       this.todos = todos.data.listTasks.items;
+      console.log("TODOS 2: ", this.todos);
     }
   }
 };
