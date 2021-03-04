@@ -12,9 +12,6 @@ import {
 } from '@aws-amplify/ui-components/loader';
 
 Amplify.configure(aws_exports);
-applyPolyfills().then(() => {
-  defineCustomElements(window);
-});
 
 // Vue components
 import Auth from './components/Auth.vue'
