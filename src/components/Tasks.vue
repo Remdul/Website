@@ -25,7 +25,7 @@ export default {
   name: 'app',
 
   async created() {
-    this.listTasks();
+    this.getTodos();
   },
 
   data() {
@@ -48,11 +48,10 @@ export default {
       this.description = '';
     },
 
-    async listTasks() {
+    async getTodos() {
       const todos = await API.graphql({
         query: listTasks
       });
-      console.log("TODOS: ", todos);
       this.todos = todos.data.listTasks.items;
     }
   }
