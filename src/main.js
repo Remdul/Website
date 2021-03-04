@@ -6,11 +6,6 @@ import Amplify, * as AmplifyModules from 'aws-amplify'
 import { AmplifyPlugin } from 'aws-amplify-vue'
 import aws_exports from './aws-exports'
 
-import {
-  applyPolyfills,
-  defineCustomElements,
-} from '@aws-amplify/ui-components/loader';
-
 Amplify.configure(aws_exports);
 
 // Vue components
