@@ -32,12 +32,10 @@ export default {
     return {
       title: '',
       description: '',
-      tasks: []
+      todos: []
     }
   },
   methods: {
-
-
     async createTask() {
       const { title, description } = this;
       if (!title || !description) return;
@@ -54,12 +52,11 @@ export default {
       const todos = await API.graphql({
         query: listTasks
       });
+      console.log("TODOS: ", todos);
       this.todos = todos.data.listTasks.items;
     }
-
   }
 };
-
 </script>
 
 <style scoped>
