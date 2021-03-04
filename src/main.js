@@ -5,7 +5,16 @@ import VueRouter from 'vue-router'
 import Amplify, * as AmplifyModules from 'aws-amplify'
 import { AmplifyPlugin } from 'aws-amplify-vue'
 import aws_exports from './aws-exports'
-Amplify.configure(aws_exports)
+
+import {
+  applyPolyfills,
+  defineCustomElements,
+} from '@aws-amplify/ui-components/loader';
+
+Amplify.configure(aws_exports);
+applyPolyfills().then(() => {
+  defineCustomElements(window);
+});
 
 // Vue components
 import Auth from './components/Auth.vue'
