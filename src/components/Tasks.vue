@@ -19,7 +19,7 @@
 import { API } from 'aws-amplify';
 import { createTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
-import { onCreateTask } from './graphql/subscriptions';
+import { onCreateTask } from '../graphql/subscriptions';
 
 export default {
   name: 'app',
