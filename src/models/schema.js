@@ -50,7 +50,10 @@ export const schema = {
                                 "groups": [
                                     "Managers"
                                 ],
-                                "queries": null,
+                                "queries": [
+                                    "get",
+                                    "list"
+                                ],
                                 "mutations": [
                                     "create",
                                     "update",
@@ -73,12 +76,15 @@ export const schema = {
                                     "get",
                                     "list"
                                 ],
-                                "mutations": null,
+                                "mutations": [
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ],
                                 "operations": [
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             }
                         ]
