@@ -13,17 +13,21 @@
               <th>ID</th>
               <th>Title</th>
               <th>Description</th>
+              <th>Created</th>
+              <th>Updated</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in todos" :key="item.id">
-              <td>{{ post.id }}</td>
-              <td>{{ post.title }}</td>
-              <td>{{ post.description }}</td>
+              <td>{{ item.id }}</td>
+              <td>{{ item.title }}</td>
+              <td>{{ item.description }}</td>
+              <td>{{ item.createdAt }}</td>
+              <td>{{ item.updatedAt }}</td>
               <td class="text-right">
                 <button v-on:click="">Edit Task</button>
-                <button v-on:click="">Delete Task</button>
+                <button v-on:click="deleteTask">Delete Task</button>
               </td>
             </tr>
           </tbody>
@@ -36,7 +40,7 @@
 
 <script>
 import { API, graphqlOperation } from 'aws-amplify';
-import { createTask } from '../graphql/mutations';
+import { createTask, deleteTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
 import { onCreateTask } from '../graphql/subscriptions';
 

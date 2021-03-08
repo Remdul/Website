@@ -11,9 +11,6 @@
         <router-link class='link' to="/" v-if="!isAuthenticated">Sign In</router-link>
         <router-link class='link' to="/profile" v-if="isAuthenticated">Profile</router-link>
         <p class='link' v-on:click="signOut" v-if="isAuthenticated">Sign Out</p>
-
-        
-        
       </div>
     </div>
     <router-view></router-view>
