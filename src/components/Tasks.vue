@@ -40,13 +40,14 @@
 import { API, graphqlOperation } from 'aws-amplify';
 import { createTask, deleteTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
-import { onCreateTask } from '../graphql/subscriptions';
+import { onCreateTask, onDeleteTask } from '../graphql/subscriptions';
 
 export default {
   name: 'app',
 
   async created(){
     this.getTodos();
+    this.subscribe();
   },
 
   data() {
@@ -92,7 +93,20 @@ export default {
       this.todos = todos.data.listTasks.items.filter(item => item._deleted !== true);
     }
   },
+  
+  subscribe() {
+    API.graphql({ query: onCreateTask }).subscribe({
+      next: (eventData) => {
+        let todo = eventData.value.data.onCreateTask;
+        if (this.todos.some(item => item.id === todo.id)) return; // remove duplications
+        this.todos = [...this.todos, todo];
+      }
+    });
+  },
+
+
 };
+
 </script>
 
 <style scoped>
