@@ -5,11 +5,31 @@
     <input type="text" v-model="description" placeholder="Task description">
     <button v-on:click="createTask">Create Task</button>
   
-    <div v-for="item in todos" :key="item.id">
-      <h3>{{ item.title }}</h3>
-      <p>{{ item.description }}</p>
-    </div>
-
+    <b-row>
+      <b-col>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in todos" :key="item.id">
+              <td>{{ post.id }}</td>
+              <td>{{ post.title }}</td>
+              <td>{{ post.description }}</td>
+              <td class="text-right">
+                <button v-on:click="">Edit Task</button>
+                <button v-on:click="">Delete Task</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
