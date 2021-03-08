@@ -55,7 +55,6 @@ export default {
 
   async created(){
     this.getTodos();
-    this.subscribe();
   },
 
   data() {
