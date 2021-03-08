@@ -89,7 +89,7 @@ export default {
         query: listTasks
       });
       console.log("DEBUG::: TODOS 1: ", todos);
-      this.todos = todos.data.listTasks.items;
+      this.todos = todos.data.listTasks.itemss.filter(item => item._deleted !== true);
     }
   },
 };
