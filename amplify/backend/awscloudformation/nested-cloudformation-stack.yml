@@ -130,7 +130,7 @@
             ]
           },
           "S3DeploymentBucket": "amplify-vueauth-dev-200757-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/7a073038c0b3bf1fe0682e4101b6d27bc69d10bc",
+          "S3DeploymentRootKey": "amplify-appsync-files/c46d9367fdc4c80fd9eed70432ff976fb26e3a11",
           "env": "dev"
         }
       }
