@@ -15,8 +15,7 @@
 
 
 <script>
-
-import { API } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import { createTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
 import { onCreateTask } from '../graphql/subscriptions';
@@ -24,11 +23,9 @@ import { onCreateTask } from '../graphql/subscriptions';
 export default {
   name: 'app',
 
-  created(){
+  async created(){
     this.getTodos();
-    this.subscribe();
   },
-
 
   data() {
     return {
@@ -37,6 +34,7 @@ export default {
       todos: []
     }
   },
+  
   methods: {
     async createTask() {
       const { title, description } = this;
@@ -59,17 +57,6 @@ export default {
       console.log("TODOS 2: ", this.todos);
     }
   },
-  
-  subscribe() {
-    API.graphql({ query: onCreateTask })
-      .subscribe({
-        next: (eventData) => {
-          let todo = eventData.value.data.onCreateTask;
-          if (this.todos.some(item => item.title === todo.title)) return; // remove duplications
-          this.todos = [...this.todos, todo];
-        }
-      });
-  }
 };
 </script>
 
