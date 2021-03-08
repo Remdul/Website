@@ -10,7 +10,6 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Title</th>
               <th>Description</th>
               <th>Created</th>
@@ -20,14 +19,13 @@
           </thead>
           <tbody>
             <tr v-for="item in todos" :key="item.id">
-              <td>{{ item.id }}</td>
               <td>{{ item.title }}</td>
               <td>{{ item.description }}</td>
               <td>{{ item.createdAt }}</td>
               <td>{{ item.updatedAt }}</td>
               <td class="text-right">
                 <button v-on:click="">Edit Task</button>
-                <button v-on:click="deleteTask">Delete Task</button>
+                <a href="#" @click.prevent="deleteTask(item.id)">Delete</a>
               </td>
             </tr>
           </tbody>
@@ -71,14 +69,22 @@ export default {
       this.title = '';
       this.description = '';
     },
-
+    
+    async deleteTask(id){
+      if (confirm('Are you sure you want to delete this task?')) {
+        await API.graphql({
+          query: deleteTask,
+          variables: {id},
+        });
+      }
+    },
+    
     async getTodos() {
       const todos = await API.graphql({
         query: listTasks
       });
-      console.log("TODOS 1: ", todos);
+      console.log("DEBUG::: TODOS 1: ", todos);
       this.todos = todos.data.listTasks.items;
-      console.log("TODOS 2: ", this.todos);
     }
   },
 };
