@@ -70,11 +70,15 @@ export default {
       this.description = '';
     },
     
-    async deleteTask(id){
+    async deleteTask(pid){
+      const details = {
+        id: pid,
+      };
+      
       if (confirm('Are you sure you want to delete this task?')) {
         await API.graphql({
           query: deleteTask,
-          variables: {id},
+          variables: {input: details},
         });
       }
     },
