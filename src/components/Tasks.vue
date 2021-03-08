@@ -42,6 +42,14 @@ import { createTask, deleteTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
 import { onCreateTask, onDeleteTask } from '../graphql/subscriptions';
 
+const subscription = API.graphql(graphqlOperation(onCreateTask)).subscribe({
+  next: (eventData) => {
+    let todo = eventData.value.data.onCreateTask;
+    if (this.todos.some(item => item.id === todo.id)) return; // remove duplications
+    this.todos = [...this.todos, todo];
+  }
+});
+
 export default {
   name: 'app',
 
@@ -89,22 +97,9 @@ export default {
       const todos = await API.graphql({
         query: listTasks
       });
-      console.log("DEBUG::: TODOS 1: ", todos);
       this.todos = todos.data.listTasks.items.filter(item => item._deleted !== true);
     }
   },
-  
-  subscribe() {
-    API.graphql({ query: onCreateTask }).subscribe({
-      next: (eventData) => {
-        let todo = eventData.value.data.onCreateTask;
-        if (this.todos.some(item => item.id === todo.id)) return; // remove duplications
-        this.todos = [...this.todos, todo];
-      }
-    });
-  },
-
-
 };
 
 </script>
