@@ -54,25 +54,24 @@ export default {
   name: 'sign-up',
   methods: {
 
-    async createPerson(name, phone, email) {
-      const todo = { 
-        "userName": name,
-        "phoneNumber" : phone,
-        "email": email, 
-      };
-      await API.graphql({
-        query: createPerson,
-        variables: {input: todo},
-      });
-    },
-
     async signUp() {
       try {
+
         await this.$Amplify.Auth.signUp(this.form)
         this.phase = 1
+        
+        const userInfo = { 
+          "userName"    : this.form.username,
+          "phoneNumber" : this.form.attributes.phone_number,
+          "email"       : this.form.attributes.email, 
+        };
+        await API.graphql({
+          query: createPerson,
+          variables: {input: userInfo},
+        });
+        
+        console.log('user successfully created!')        
         console.log('user successfully signed up!')
-        createPerson(this.form.username, this.form.attributes.phone_number, this.form.attributes.email);
-        console.log('user successfully created!')
       } catch (err) {
         console.log('error signing up...', err)
       }
