@@ -1,16 +1,36 @@
 <template>
   <div class='container'>
-    <h1>Yo, {{ username }}</h1>
+    <h1>Yo, {{ thisUser.userName }}</h1>
     <p>Here's all your info:</p>
-    <p>Username: {{ username }}</p>
-    <p>Email: {{ email }}</p>
+    <p>Username: {{ thisUser.userName }}</p>
+    <p>Email: {{ thisUser.email }}</p>
   </div>
 </template>
 
 <script>
 
+import { getPerson } from '../graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify';
+
 export default {
   name: 'home',
+  
+  data() {
+    return {
+      thisUser: '',  
+    }
+  },
+  
+  methods: {
+    async getPerson() {
+      const user = await API.graphql({
+        query: getPerson,
+        variables: {input: this.$store.state.user.username},
+      });
+      this.thisUser = user;
+    }
+  },
+  
   computed: {
     username() {
       return this.$store.state.user.username
