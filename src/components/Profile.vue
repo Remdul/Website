@@ -1,9 +1,9 @@
 <template>
   <div class='container'>
-    <h1>Yo, {{ thisUser.userName }}</h1>
+    <h1>Yo, {{ thisUsername }}</h1>
     <p>Here's all your info:</p>
-    <p>Username: {{ thisUser.userName }}</p>
-    <p>Email: {{ thisUser.email }}</p>
+    <p>Username: {{ thisUsername }}</p>
+    <p>Email: {{ thisUseremail }}</p>
   </div>
 </template>
 
@@ -17,7 +17,8 @@ export default {
   
   data() {
     return {
-      thisUser: '',  
+      thisUsername: '',  
+      thisUseremail: '',  
     }
   },
   
@@ -27,7 +28,9 @@ export default {
         query: getPerson,
         variables: {input: this.$store.state.user.username},
       });
-      this.thisUser = user;
+      console.log("USER: ", user)
+      this.thisUseremail = user.email;
+      this.thisUsername = user.userName;
     }
   },
   
