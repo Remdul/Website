@@ -8,6 +8,10 @@ import aws_exports from './aws-exports'
 
 Amplify.configure(aws_exports);
 
+Amplify.configure({
+  aws_appsync_authenticationType: "AMAZON_COGNITO_USER_POOLS"
+});
+
 // Vue components
 import Auth from './components/Auth.vue'
 import App from './components/App.vue'
