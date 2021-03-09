@@ -13,7 +13,7 @@ export default {
   name: 'home',
   computed: {
     username() {
-      return this.$store.state.user.username
+      return this.$store.state.user
     },
     email() {
       return this.$store.state.user.email
