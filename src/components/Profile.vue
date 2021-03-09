@@ -15,6 +15,10 @@ import { API, graphqlOperation } from 'aws-amplify';
 export default {
   name: 'home',
   
+  async created(){
+    this.getPerson();
+  },
+  
   data() {
     return {
       thisUsername: '',  
@@ -24,6 +28,7 @@ export default {
   
   methods: {
     async getPerson() {
+      console.log("STORE USER: ", this.$store.state.user.username)
       const user = await API.graphql({
         query: getPerson,
         variables: {input: this.$store.state.user.username},
