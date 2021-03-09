@@ -61,15 +61,16 @@ export default {
           "phoneNumber" : this.form.attributes.phone_number,
           "email"       : this.form.attributes.email, 
         };
-        
+        console.log("USER INFO: ", userInfo)
         await this.$Amplify.Auth.signUp(this.form)
         this.phase = 1
         console.log('user successfully signed up!')
 
-        await API.graphql({
+        const temp = await API.graphql({
           query: createPerson,
           variables: {input: userInfo},
         });
+        console.log("TEMP: ", temp)
         console.log('user successfully created!')
 
       } catch (err) {
