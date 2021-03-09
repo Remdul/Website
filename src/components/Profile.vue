@@ -12,7 +12,6 @@
 export default {
   name: 'home',
   computed: {
-    console.log("USER: ", this.$store.state.user);
     username() {
       return this.$store.state.user.username
     },
