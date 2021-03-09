@@ -1,6 +1,213 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createFamily = /* GraphQL */ `
+  mutation CreateFamily(
+    $input: CreateFamilyInput!
+    $condition: ModelFamilyConditionInput
+  ) {
+    createFamily(input: $input, condition: $condition) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const updateFamily = /* GraphQL */ `
+  mutation UpdateFamily(
+    $input: UpdateFamilyInput!
+    $condition: ModelFamilyConditionInput
+  ) {
+    updateFamily(input: $input, condition: $condition) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const deleteFamily = /* GraphQL */ `
+  mutation DeleteFamily(
+    $input: DeleteFamilyInput!
+    $condition: ModelFamilyConditionInput
+  ) {
+    deleteFamily(input: $input, condition: $condition) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const createPerson = /* GraphQL */ `
+  mutation CreatePerson(
+    $input: CreatePersonInput!
+    $condition: ModelPersonConditionInput
+  ) {
+    createPerson(input: $input, condition: $condition) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      email
+      familyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      tasks {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const updatePerson = /* GraphQL */ `
+  mutation UpdatePerson(
+    $input: UpdatePersonInput!
+    $condition: ModelPersonConditionInput
+  ) {
+    updatePerson(input: $input, condition: $condition) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      email
+      familyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      tasks {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const deletePerson = /* GraphQL */ `
+  mutation DeletePerson(
+    $input: DeletePersonInput!
+    $condition: ModelPersonConditionInput
+  ) {
+    deletePerson(input: $input, condition: $condition) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      email
+      familyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      tasks {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const createTask = /* GraphQL */ `
   mutation CreateTask(
     $input: CreateTaskInput!
@@ -11,11 +218,26 @@ export const createTask = /* GraphQL */ `
       title
       description
       status
+      points
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      TaskPeople {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -29,11 +251,26 @@ export const updateTask = /* GraphQL */ `
       title
       description
       status
+      points
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      TaskPeople {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -47,11 +284,26 @@ export const deleteTask = /* GraphQL */ `
       title
       description
       status
+      points
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      TaskPeople {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -103,6 +355,159 @@ export const deletePrivateNote = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+    }
+  }
+`;
+export const createTaskPerson = /* GraphQL */ `
+  mutation CreateTaskPerson(
+    $input: CreateTaskPersonInput!
+    $condition: ModelTaskPersonConditionInput
+  ) {
+    createTaskPerson(input: $input, condition: $condition) {
+      id
+      taskID
+      personID
+      task {
+        id
+        title
+        description
+        status
+        points
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        TaskPeople {
+          nextToken
+          startedAt
+        }
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        tasks {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
+export const updateTaskPerson = /* GraphQL */ `
+  mutation UpdateTaskPerson(
+    $input: UpdateTaskPersonInput!
+    $condition: ModelTaskPersonConditionInput
+  ) {
+    updateTaskPerson(input: $input, condition: $condition) {
+      id
+      taskID
+      personID
+      task {
+        id
+        title
+        description
+        status
+        points
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        TaskPeople {
+          nextToken
+          startedAt
+        }
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        tasks {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
+export const deleteTaskPerson = /* GraphQL */ `
+  mutation DeleteTaskPerson(
+    $input: DeleteTaskPersonInput!
+    $condition: ModelTaskPersonConditionInput
+  ) {
+    deleteTaskPerson(input: $input, condition: $condition) {
+      id
+      taskID
+      personID
+      task {
+        id
+        title
+        description
+        status
+        points
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        TaskPeople {
+          nextToken
+          startedAt
+        }
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        tasks {
+          nextToken
+          startedAt
+        }
+      }
     }
   }
 `;

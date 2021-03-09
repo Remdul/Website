@@ -19,11 +19,201 @@ export const syncTasks = /* GraphQL */ `
         title
         description
         status
+        points
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
+        TaskPeople {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getFamily = /* GraphQL */ `
+  query GetFamily($id: ID!) {
+    getFamily(id: $id) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const listFamilys = /* GraphQL */ `
+  query ListFamilys(
+    $filter: ModelFamilyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFamilys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        familyName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        People {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncFamilies = /* GraphQL */ `
+  query SyncFamilies(
+    $filter: ModelFamilyFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncFamilies(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        familyName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        People {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const listPersons = /* GraphQL */ `
+  query ListPersons(
+    $filter: ModelPersonFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPersons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        tasks {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getPerson = /* GraphQL */ `
+  query GetPerson($id: ID!) {
+    getPerson(id: $id) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      email
+      familyID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      tasks {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const syncPeople = /* GraphQL */ `
+  query SyncPeople(
+    $filter: ModelPersonFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPeople(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        tasks {
+          nextToken
+          startedAt
+        }
       }
       nextToken
       startedAt
@@ -37,11 +227,26 @@ export const getTask = /* GraphQL */ `
       title
       description
       status
+      points
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      TaskPeople {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -57,39 +262,16 @@ export const listTasks = /* GraphQL */ `
         title
         description
         status
+        points
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPrivateNotes = /* GraphQL */ `
-  query SyncPrivateNotes(
-    $filter: ModelPrivateNoteFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPrivateNotes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        content
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        TaskPeople {
+          nextToken
+          startedAt
+        }
       }
       nextToken
       startedAt
@@ -126,6 +308,88 @@ export const listPrivateNotes = /* GraphQL */ `
         createdAt
         updatedAt
         owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncPrivateNotes = /* GraphQL */ `
+  query SyncPrivateNotes(
+    $filter: ModelPrivateNoteFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPrivateNotes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        content
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncTaskPeople = /* GraphQL */ `
+  query SyncTaskPeople(
+    $filter: ModelTaskPersonFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncTaskPeople(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        taskID
+        personID
+        task {
+          id
+          title
+          description
+          status
+          points
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        person {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
       }
       nextToken
       startedAt
