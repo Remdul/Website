@@ -45,15 +45,34 @@
 
 <script>
 
+import { createPerson } from '../graphql/mutations';
+import { API } from 'aws-amplify';
+
+
 export default {
   props: ['toggleForm'],
   name: 'sign-up',
   methods: {
+
+    async createPerson(name, phone, email) {
+      const todo = { 
+        "userName": name,
+        "phoneNumber" : phone,
+        "email": email, 
+      };
+      await API.graphql({
+        query: createPerson,
+        variables: {input: todo},
+      });
+    },
+
     async signUp() {
       try {
         await this.$Amplify.Auth.signUp(this.form)
         this.phase = 1
         console.log('user successfully signed up!')
+        createPerson(this.form.username, this.form.attributes.phone_number, this.form.attributes.email);
+        console.log('user successfully created!')
       } catch (err) {
         console.log('error signing up...', err)
       }

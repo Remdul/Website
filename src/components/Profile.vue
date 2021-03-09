@@ -12,8 +12,9 @@
 export default {
   name: 'home',
   computed: {
+    console.log("USER: ", this.$store.state.user);
     username() {
-      return this.$store.state.user
+      return this.$store.state.user.username
     },
     email() {
       return this.$store.state.user.email
