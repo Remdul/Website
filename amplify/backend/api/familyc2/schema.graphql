@@ -1,27 +1,35 @@
-type Family @model @auth(rules: [{allow: private}]) {
+type Family @model @auth(rules: [{allow: owner, operations: [read, create, update]}]) {
   id: ID!
   People: [Person] @connection(keyName: "byFamily", fields: ["id"])
   familyName: String
 }
 
-type Person @model @auth(rules: [{allow: private}]) @key(name: "byFamily", fields: ["familyID"]) {
+type Person @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}]) @key(name: "byTask", fields: ["taskID"]) {
   id: ID!
   userName: String!
   firstName: String
   lastName: String
   phoneNumber: AWSPhone
-  tasks: [TaskPerson] @connection(keyName: "byPerson", fields: ["id"])
+  assignedTasks: [TaskPerson] @connection(keyName: "byPerson", fields: ["id"])
   email: AWSEmail
   familyID: ID
+  points: Int
+  ownedTasks: [Task] @connection(keyName: "byPerson", fields: ["id"])
+  taskID: ID
 }
 
-type Task @model @auth(rules: [{allow: groups, groups: ["Managers"], queries: [get, list], mutations: [create, update, delete]}, {allow: groups, groups: ["Employees"], queries: [get, list], mutations: [create, update, delete]}]) {
+type Task @model @auth(rules: [{allow: private, operations: [read, update, create]}, {allow: owner, operations: [read, update, create, delete]}]) @key(name: "byPerson", fields: ["personID"]) {
   id: ID!
   title: String!
   description: String
   status: String
-  points: String
-  TaskPeople: [TaskPerson] @connection(keyName: "byTask", fields: ["id"])
+  value: String
+  Owner: [TaskPerson] @connection(keyName: "byTask", fields: ["id"])
+  repeatable: Boolean
+  endTime: AWSDateTime
+  repeatHours: Int
+  personID: ID
+  AssignedTo: [Person] @connection(keyName: "byTask", fields: ["id"])
 }
 
 type PrivateNote @model @auth(rules: [{allow: owner}]) {
@@ -29,7 +37,7 @@ type PrivateNote @model @auth(rules: [{allow: owner}]) {
   content: String!
 }
 
-type TaskPerson @model(queries: null) @key(name: "byTask", fields: ["taskID", "personID"]) @key(name: "byPerson", fields: ["personID", "taskID"]) @auth(rules: [{allow: groups, groups: ["Managers"], queries: [get, list], mutations: [create, update, delete]}, {allow: groups, groups: ["Employees"], queries: [get, list], mutations: [create, update, delete]}, {allow: private}]) {
+type TaskPerson @model(queries: null) @key(name: "byTask", fields: ["taskID", "personID"]) @key(name: "byPerson", fields: ["personID", "taskID"]) @auth(rules: [{allow: private, operations: [read, update, create]}, {allow: owner, operations: [read, update, create, delete]}, {allow: owner, operations: [read, create, update, delete]}]) {
   id: ID!
   taskID: ID!
   personID: ID!

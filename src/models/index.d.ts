@@ -18,9 +18,12 @@ export declare class Person {
   readonly firstName?: string;
   readonly lastName?: string;
   readonly phoneNumber?: string;
-  readonly tasks?: (TaskPerson | null)[];
+  readonly assignedTasks?: (TaskPerson | null)[];
   readonly email?: string;
   readonly familyID?: string;
+  readonly points?: number;
+  readonly ownedTasks?: (Task | null)[];
+  readonly taskID?: string;
   constructor(init: ModelInit<Person>);
   static copyOf(source: Person, mutator: (draft: MutableModel<Person>) => MutableModel<Person> | void): Person;
 }
@@ -38,8 +41,13 @@ export declare class Task {
   readonly title: string;
   readonly description?: string;
   readonly status?: string;
-  readonly points?: string;
-  readonly TaskPeople?: (TaskPerson | null)[];
+  readonly value?: string;
+  readonly Owner?: (TaskPerson | null)[];
+  readonly repeatable?: boolean;
+  readonly endTime?: string;
+  readonly repeatHours?: number;
+  readonly personID?: string;
+  readonly AssignedTo?: (Person | null)[];
   constructor(init: ModelInit<Task>);
   static copyOf(source: Task, mutator: (draft: MutableModel<Task>) => MutableModel<Task> | void): Task;
 }

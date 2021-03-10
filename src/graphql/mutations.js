@@ -1,6 +1,44 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const deleteFamily = /* GraphQL */ `
+  mutation DeleteFamily(
+    $input: DeleteFamilyInput!
+    $condition: ModelFamilyConditionInput
+  ) {
+    deleteFamily(input: $input, condition: $condition) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const createFamily = /* GraphQL */ `
   mutation CreateFamily(
     $input: CreateFamilyInput!
@@ -14,6 +52,7 @@ export const createFamily = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      owner
       People {
         items {
           id
@@ -23,11 +62,14 @@ export const createFamily = /* GraphQL */ `
           phoneNumber
           email
           familyID
+          points
+          taskID
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
         startedAt
@@ -48,6 +90,7 @@ export const updateFamily = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      owner
       People {
         items {
           id
@@ -57,45 +100,14 @@ export const updateFamily = /* GraphQL */ `
           phoneNumber
           email
           familyID
+          points
+          taskID
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const deleteFamily = /* GraphQL */ `
-  mutation DeleteFamily(
-    $input: DeleteFamilyInput!
-    $condition: ModelFamilyConditionInput
-  ) {
-    deleteFamily(input: $input, condition: $condition) {
-      id
-      familyName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      People {
-        items {
-          id
-          userName
-          firstName
-          lastName
-          phoneNumber
-          email
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
+          owner
         }
         nextToken
         startedAt
@@ -116,12 +128,35 @@ export const createPerson = /* GraphQL */ `
       phoneNumber
       email
       familyID
+      points
+      taskID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      tasks {
+      owner
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      assignedTasks {
         items {
           id
           taskID
@@ -151,12 +186,35 @@ export const updatePerson = /* GraphQL */ `
       phoneNumber
       email
       familyID
+      points
+      taskID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      tasks {
+      owner
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      assignedTasks {
         items {
           id
           taskID
@@ -186,12 +244,35 @@ export const deletePerson = /* GraphQL */ `
       phoneNumber
       email
       familyID
+      points
+      taskID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      tasks {
+      owner
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      assignedTasks {
         items {
           id
           taskID
@@ -218,13 +299,38 @@ export const createTask = /* GraphQL */ `
       title
       description
       status
-      points
+      value
+      repeatable
+      endTime
+      repeatHours
+      personID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      TaskPeople {
+      AssignedTo {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      Owner {
         items {
           id
           taskID
@@ -251,13 +357,38 @@ export const updateTask = /* GraphQL */ `
       title
       description
       status
-      points
+      value
+      repeatable
+      endTime
+      repeatHours
+      personID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      TaskPeople {
+      AssignedTo {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      Owner {
         items {
           id
           taskID
@@ -284,13 +415,38 @@ export const deleteTask = /* GraphQL */ `
       title
       description
       status
-      points
+      value
+      repeatable
+      endTime
+      repeatHours
+      personID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      TaskPeople {
+      AssignedTo {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      Owner {
         items {
           id
           taskID
@@ -367,22 +523,6 @@ export const createTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      task {
-        id
-        title
-        description
-        status
-        points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        TaskPeople {
-          nextToken
-          startedAt
-        }
-      }
       _version
       _deleted
       _lastChangedAt
@@ -396,12 +536,43 @@ export const createTaskPerson = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+      }
+      task {
+        id
+        title
+        description
+        status
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }
@@ -418,22 +589,6 @@ export const updateTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      task {
-        id
-        title
-        description
-        status
-        points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        TaskPeople {
-          nextToken
-          startedAt
-        }
-      }
       _version
       _deleted
       _lastChangedAt
@@ -447,12 +602,43 @@ export const updateTaskPerson = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+      }
+      task {
+        id
+        title
+        description
+        status
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }
@@ -469,22 +655,6 @@ export const deleteTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      task {
-        id
-        title
-        description
-        status
-        points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        TaskPeople {
-          nextToken
-          startedAt
-        }
-      }
       _version
       _deleted
       _lastChangedAt
@@ -498,12 +668,43 @@ export const deleteTaskPerson = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+      }
+      task {
+        id
+        title
+        description
+        status
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }

@@ -44,13 +44,15 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "private",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
                                 "operations": [
+                                    "read",
                                     "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
+                                    "update"
+                                ],
+                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
@@ -95,8 +97,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "tasks": {
-                    "name": "tasks",
+                "assignedTasks": {
+                    "name": "assignedTasks",
                     "isArray": true,
                     "type": {
                         "model": "TaskPerson"
@@ -122,6 +124,34 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
+                },
+                "points": {
+                    "name": "points",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ownedTasks": {
+                    "name": "ownedTasks",
+                    "isArray": true,
+                    "type": {
+                        "model": "Task"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "personID"
+                    }
+                },
+                "taskID": {
+                    "name": "taskID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -141,17 +171,29 @@ export const schema = {
                     }
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byTask",
+                        "fields": [
+                            "taskID"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
                             {
-                                "allow": "private",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
                                 "operations": [
+                                    "read",
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
-                                ]
+                                    "delete"
+                                ],
+                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
@@ -229,57 +271,36 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Managers"
-                                ],
-                                "queries": [
-                                    "get",
-                                    "list"
-                                ],
-                                "mutations": [
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ],
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Employees"
-                                ],
-                                "queries": [
-                                    "get",
-                                    "list"
-                                ],
-                                "mutations": [
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ],
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ]
-                            },
-                            {
                                 "allow": "private",
                                 "operations": [
+                                    "read",
+                                    "update",
+                                    "create"
+                                ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "operations": [
+                                    "read",
+                                    "update",
+                                    "create",
+                                    "delete"
+                                ],
+                                "identityClaim": "cognito:username"
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "operations": [
+                                    "read",
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
-                                ]
+                                    "delete"
+                                ],
+                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
@@ -317,15 +338,15 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "points": {
-                    "name": "points",
+                "value": {
+                    "name": "value",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "TaskPeople": {
-                    "name": "TaskPeople",
+                "Owner": {
+                    "name": "Owner",
                     "isArray": true,
                     "type": {
                         "model": "TaskPerson"
@@ -337,6 +358,48 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "task"
                     }
+                },
+                "repeatable": {
+                    "name": "repeatable",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "endTime": {
+                    "name": "endTime",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "repeatHours": {
+                    "name": "repeatHours",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "personID": {
+                    "name": "personID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "AssignedTo": {
+                    "name": "AssignedTo",
+                    "isArray": true,
+                    "type": {
+                        "model": "Person"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "taskID"
+                    }
                 }
             },
             "syncable": true,
@@ -347,52 +410,37 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPerson",
+                        "fields": [
+                            "personID"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
                             {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Managers"
-                                ],
-                                "queries": [
-                                    "get",
-                                    "list"
-                                ],
-                                "mutations": [
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ],
+                                "allow": "private",
                                 "operations": [
-                                    "create",
+                                    "read",
                                     "update",
-                                    "delete"
+                                    "create"
                                 ]
                             },
                             {
-                                "groupClaim": "cognito:groups",
                                 "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Employees"
-                                ],
-                                "queries": [
-                                    "get",
-                                    "list"
-                                ],
-                                "mutations": [
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ],
+                                "ownerField": "owner",
+                                "allow": "owner",
                                 "operations": [
-                                    "create",
+                                    "read",
                                     "update",
+                                    "create",
                                     "delete"
-                                ]
+                                ],
+                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
@@ -448,5 +496,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "50da6d72f47904727143b47ba6a2aa7f"
+    "version": "3ebfba928022c343b5ce1c143ae34990"
 };

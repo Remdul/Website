@@ -1,40 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const syncTasks = /* GraphQL */ `
-  query SyncTasks(
-    $filter: ModelTaskFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncTasks(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        description
-        status
-        points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        TaskPeople {
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getFamily = /* GraphQL */ `
   query GetFamily($id: ID!) {
     getFamily(id: $id) {
@@ -45,6 +11,7 @@ export const getFamily = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      owner
       People {
         items {
           id
@@ -54,11 +21,14 @@ export const getFamily = /* GraphQL */ `
           phoneNumber
           email
           familyID
+          points
+          taskID
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
         startedAt
@@ -81,6 +51,7 @@ export const listFamilys = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+        owner
         People {
           nextToken
           startedAt
@@ -112,6 +83,7 @@ export const syncFamilies = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+        owner
         People {
           nextToken
           startedAt
@@ -137,12 +109,19 @@ export const listPersons = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
           nextToken
           startedAt
         }
@@ -162,12 +141,35 @@ export const getPerson = /* GraphQL */ `
       phoneNumber
       email
       familyID
+      points
+      taskID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      tasks {
+      owner
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      assignedTasks {
         items {
           id
           taskID
@@ -205,12 +207,55 @@ export const syncPeople = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const listTasks = /* GraphQL */ `
+  query ListTasks(
+    $filter: ModelTaskFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        status
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }
@@ -227,13 +272,38 @@ export const getTask = /* GraphQL */ `
       title
       description
       status
-      points
+      value
+      repeatable
+      endTime
+      repeatHours
+      personID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      TaskPeople {
+      AssignedTo {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      Owner {
         items {
           id
           taskID
@@ -250,25 +320,39 @@ export const getTask = /* GraphQL */ `
     }
   }
 `;
-export const listTasks = /* GraphQL */ `
-  query ListTasks(
+export const syncTasks = /* GraphQL */ `
+  query SyncTasks(
     $filter: ModelTaskFilterInput
     $limit: Int
     $nextToken: String
+    $lastSync: AWSTimestamp
   ) {
-    listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    syncTasks(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         title
         description
         status
-        points
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        TaskPeople {
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }
@@ -359,18 +443,6 @@ export const syncTaskPeople = /* GraphQL */ `
         id
         taskID
         personID
-        task {
-          id
-          title
-          description
-          status
-          points
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
         _version
         _deleted
         _lastChangedAt
@@ -384,6 +456,25 @@ export const syncTaskPeople = /* GraphQL */ `
           phoneNumber
           email
           familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        task {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
           _version
           _deleted
           _lastChangedAt

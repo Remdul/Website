@@ -1,6 +1,276 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateFamily = /* GraphQL */ `
+  subscription OnCreateFamily($owner: String) {
+    onCreateFamily(owner: $owner) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateFamily = /* GraphQL */ `
+  subscription OnUpdateFamily($owner: String) {
+    onUpdateFamily(owner: $owner) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteFamily = /* GraphQL */ `
+  subscription OnDeleteFamily($owner: String) {
+    onDeleteFamily(owner: $owner) {
+      id
+      familyName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onCreatePerson = /* GraphQL */ `
+  subscription OnCreatePerson($owner: String) {
+    onCreatePerson(owner: $owner) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      email
+      familyID
+      points
+      taskID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      assignedTasks {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdatePerson = /* GraphQL */ `
+  subscription OnUpdatePerson($owner: String) {
+    onUpdatePerson(owner: $owner) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      email
+      familyID
+      points
+      taskID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      assignedTasks {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeletePerson = /* GraphQL */ `
+  subscription OnDeletePerson($owner: String) {
+    onDeletePerson(owner: $owner) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      email
+      familyID
+      points
+      taskID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      assignedTasks {
+        items {
+          id
+          taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const onCreateTask = /* GraphQL */ `
   subscription OnCreateTask {
     onCreateTask {
@@ -8,13 +278,38 @@ export const onCreateTask = /* GraphQL */ `
       title
       description
       status
-      points
+      value
+      repeatable
+      endTime
+      repeatHours
+      personID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      TaskPeople {
+      AssignedTo {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      Owner {
         items {
           id
           taskID
@@ -38,13 +333,38 @@ export const onUpdateTask = /* GraphQL */ `
       title
       description
       status
-      points
+      value
+      repeatable
+      endTime
+      repeatHours
+      personID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      TaskPeople {
+      AssignedTo {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      Owner {
         items {
           id
           taskID
@@ -68,40 +388,17 @@ export const onDeleteTask = /* GraphQL */ `
       title
       description
       status
-      points
+      value
+      repeatable
+      endTime
+      repeatHours
+      personID
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      TaskPeople {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onCreateFamily = /* GraphQL */ `
-  subscription OnCreateFamily {
-    onCreateFamily {
-      id
-      familyName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      People {
+      AssignedTo {
         items {
           id
           userName
@@ -110,160 +407,19 @@ export const onCreateFamily = /* GraphQL */ `
           phoneNumber
           email
           familyID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onUpdateFamily = /* GraphQL */ `
-  subscription OnUpdateFamily {
-    onUpdateFamily {
-      id
-      familyName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      People {
-        items {
-          id
-          userName
-          firstName
-          lastName
-          phoneNumber
-          email
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onDeleteFamily = /* GraphQL */ `
-  subscription OnDeleteFamily {
-    onDeleteFamily {
-      id
-      familyName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      People {
-        items {
-          id
-          userName
-          firstName
-          lastName
-          phoneNumber
-          email
-          familyID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onCreatePerson = /* GraphQL */ `
-  subscription OnCreatePerson {
-    onCreatePerson {
-      id
-      userName
-      firstName
-      lastName
-      phoneNumber
-      email
-      familyID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      tasks {
-        items {
-          id
+          points
           taskID
-          personID
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
         startedAt
       }
-    }
-  }
-`;
-export const onUpdatePerson = /* GraphQL */ `
-  subscription OnUpdatePerson {
-    onUpdatePerson {
-      id
-      userName
-      firstName
-      lastName
-      phoneNumber
-      email
-      familyID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      tasks {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onDeletePerson = /* GraphQL */ `
-  subscription OnDeletePerson {
-    onDeletePerson {
-      id
-      userName
-      firstName
-      lastName
-      phoneNumber
-      email
-      familyID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      tasks {
+      Owner {
         items {
           id
           taskID
@@ -328,22 +484,6 @@ export const onCreateTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      task {
-        id
-        title
-        description
-        status
-        points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        TaskPeople {
-          nextToken
-          startedAt
-        }
-      }
       _version
       _deleted
       _lastChangedAt
@@ -357,12 +497,43 @@ export const onCreateTaskPerson = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+      }
+      task {
+        id
+        title
+        description
+        status
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }
@@ -376,22 +547,6 @@ export const onUpdateTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      task {
-        id
-        title
-        description
-        status
-        points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        TaskPeople {
-          nextToken
-          startedAt
-        }
-      }
       _version
       _deleted
       _lastChangedAt
@@ -405,12 +560,43 @@ export const onUpdateTaskPerson = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+      }
+      task {
+        id
+        title
+        description
+        status
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }
@@ -424,22 +610,6 @@ export const onDeleteTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      task {
-        id
-        title
-        description
-        status
-        points
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        TaskPeople {
-          nextToken
-          startedAt
-        }
-      }
       _version
       _deleted
       _lastChangedAt
@@ -453,12 +623,43 @@ export const onDeleteTaskPerson = /* GraphQL */ `
         phoneNumber
         email
         familyID
+        points
+        taskID
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        tasks {
+        owner
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+      }
+      task {
+        id
+        title
+        description
+        status
+        value
+        repeatable
+        endTime
+        repeatHours
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        AssignedTo {
+          nextToken
+          startedAt
+        }
+        Owner {
           nextToken
           startedAt
         }
