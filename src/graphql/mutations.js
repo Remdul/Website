@@ -31,7 +31,6 @@ export const deleteFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -69,7 +68,6 @@ export const createFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -107,7 +105,6 @@ export const updateFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -135,7 +132,6 @@ export const createPerson = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       ownedTasks {
         items {
           id
@@ -193,7 +189,6 @@ export const updatePerson = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       ownedTasks {
         items {
           id
@@ -251,7 +246,6 @@ export const deletePerson = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       ownedTasks {
         items {
           id
@@ -325,7 +319,6 @@ export const createTask = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -383,7 +376,6 @@ export const updateTask = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -441,7 +433,6 @@ export const deleteTask = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -543,7 +534,6 @@ export const createTaskPerson = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt
@@ -609,7 +599,6 @@ export const updateTaskPerson = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt
@@ -675,7 +664,6 @@ export const deleteTaskPerson = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt

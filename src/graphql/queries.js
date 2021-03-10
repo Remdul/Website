@@ -28,7 +28,6 @@ export const getFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -116,7 +115,6 @@ export const listPersons = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt
@@ -148,7 +146,6 @@ export const getPerson = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       ownedTasks {
         items {
           id
@@ -214,7 +211,6 @@ export const syncPeople = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt
@@ -298,7 +294,6 @@ export const getTask = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -463,7 +458,6 @@ export const syncTaskPeople = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         task {
           id

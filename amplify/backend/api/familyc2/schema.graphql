@@ -4,7 +4,7 @@ type Family @model @auth(rules: [{allow: owner, operations: [read, create, updat
   familyName: String
 }
 
-type Person @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}]) @key(name: "byTask", fields: ["taskID"]) {
+type Person @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{allow: private, operations: [read, create, update, delete]}]) @key(name: "byTask", fields: ["taskID"]) {
   id: ID!
   userName: String!
   firstName: String

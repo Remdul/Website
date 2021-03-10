@@ -28,7 +28,6 @@ export const onCreateFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -63,7 +62,6 @@ export const onUpdateFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -98,7 +96,6 @@ export const onDeleteFamily = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -107,8 +104,8 @@ export const onDeleteFamily = /* GraphQL */ `
   }
 `;
 export const onCreatePerson = /* GraphQL */ `
-  subscription OnCreatePerson($owner: String) {
-    onCreatePerson(owner: $owner) {
+  subscription OnCreatePerson {
+    onCreatePerson {
       id
       userName
       firstName
@@ -123,7 +120,6 @@ export const onCreatePerson = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       ownedTasks {
         items {
           id
@@ -162,8 +158,8 @@ export const onCreatePerson = /* GraphQL */ `
   }
 `;
 export const onUpdatePerson = /* GraphQL */ `
-  subscription OnUpdatePerson($owner: String) {
-    onUpdatePerson(owner: $owner) {
+  subscription OnUpdatePerson {
+    onUpdatePerson {
       id
       userName
       firstName
@@ -178,7 +174,6 @@ export const onUpdatePerson = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       ownedTasks {
         items {
           id
@@ -217,8 +212,8 @@ export const onUpdatePerson = /* GraphQL */ `
   }
 `;
 export const onDeletePerson = /* GraphQL */ `
-  subscription OnDeletePerson($owner: String) {
-    onDeletePerson(owner: $owner) {
+  subscription OnDeletePerson {
+    onDeletePerson {
       id
       userName
       firstName
@@ -233,7 +228,6 @@ export const onDeletePerson = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       ownedTasks {
         items {
           id
@@ -304,7 +298,6 @@ export const onCreateTask = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -359,7 +352,6 @@ export const onUpdateTask = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -414,7 +406,6 @@ export const onDeleteTask = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
-          owner
         }
         nextToken
         startedAt
@@ -504,7 +495,6 @@ export const onCreateTaskPerson = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt
@@ -567,7 +557,6 @@ export const onUpdateTaskPerson = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt
@@ -630,7 +619,6 @@ export const onDeleteTaskPerson = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         ownedTasks {
           nextToken
           startedAt
