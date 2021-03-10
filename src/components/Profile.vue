@@ -21,6 +21,8 @@ export default {
 
   data() {
     return {
+      thisUseremail: '',
+      thisUsername: '',
     }
   },
 
@@ -39,13 +41,9 @@ export default {
       console.log("STORE STATE: ", this.$store.state)
       console.log("USERNAME1: ", attributes.sub);
 
-      const variables = {
-        id: attributes.sub,
-      };
-
       const user = await API.graphql({
         query: getPerson,
-        variables: {id: variables},
+        variables: {id: attributes.sub},
       });
       console.log("USER: ", user)
       this.thisUseremail = user.email;
