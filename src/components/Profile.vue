@@ -29,11 +29,11 @@ export default {
   methods: {
     async getPerson() {
       const { variables } = {
-        id: this.username(),
+        id: this.username,
       };
       
       console.log("STORE STATE: ", this.$store.state)
-      console.log("USERNAME: ", this.username());
+      console.log("USERNAME: ", this.username);
 
       const user = await API.graphql({
         query: getPerson,
