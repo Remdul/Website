@@ -38,7 +38,7 @@ export default {
     async getPerson() {
       const { attributes } = await Auth.currentAuthenticatedUser();
       console.log("STORE STATE: ", this.$store.state)
-      console.log("USERNAME1: ", attributes.username);
+      console.log("USERNAME1: ", attributes);
 
       const variables = {
         id: attributes.username,

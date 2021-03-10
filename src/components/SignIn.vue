@@ -32,7 +32,7 @@ export default {
         this.$store.dispatch('setIsAuthenticated', true)
         this.$store.dispatch('setUser', user)
         console.log("USER AT SIGNIN: ", user)
-        //this.$router.push('profile')
+        this.$router.push('profile')
       } catch (err) {
         console.log('error: ', err)
       }
