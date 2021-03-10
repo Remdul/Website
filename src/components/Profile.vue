@@ -31,7 +31,11 @@ export default {
       const { variables } = {
         id: this.$store.state.user.username,
       };
+      
       console.log("STORE STATE: ", this.$store.state)
+      console.log("STORE STATE: ", this.$store.state.user)
+      console.log("STORE STATE: ", this.$store.state.user.username)
+
       const user = await API.graphql({
         query: getPerson,
         variables: {id: variables},
