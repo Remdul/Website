@@ -48,6 +48,7 @@
                 <td class="text-right">
                   <button v-on:click="">Edit Task</button>
                   <a href="#" @click.prevent="deleteTask(item.id)">Delete</a>
+                  <a href="#" @click.prevent="completeTask(item.id)">Complete</a>
                 </td>
               </tr>
             </tbody>
@@ -62,8 +63,8 @@
 <script>
 import 'primeflex/primeflex.css';
 import { API } from 'aws-amplify';
-import { createTask, deleteTask } from '../graphql/mutations';
-import { listTasks } from '../graphql/queries';
+import { createTask, deleteTask, updateTask } from '../graphql/mutations';
+import { listTasks, getTask } from '../graphql/queries';
 //import { onCreateTask, onDeleteTask } from '../graphql/subscriptions';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
@@ -103,6 +104,18 @@ export default {
       });
       this.title = '';
       this.description = '';
+    },
+    
+    async completeTask(pid){
+      const details = {
+        id: pid,
+      };
+
+      const task = await API.graphql({
+        query: getTask,
+        variables: {input: details},
+      });
+      
     },
     
     async deleteTask(pid){
