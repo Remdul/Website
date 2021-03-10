@@ -46,8 +46,8 @@ export default {
         variables: {id: attributes.sub},
       });
       console.log("USER: ", user)
-      this.thisUseremail = user.getPerson.email;
-      this.thisUsername = user.getPerson.userName;
+      this.thisUseremail = user.data.getPerson.email;
+      this.thisUsername = user.data.getPerson.userName;
     }
   },
 }
