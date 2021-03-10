@@ -2,7 +2,7 @@
   <div class='container'>
     <h1>Yo, {{ thisUsername }}</h1>
     <p>Here's all your info:</p>
-    <p>Username: {{ thisUsername }}</p>
+    <p>Username: {{ username }}</p>
     <p>Email: {{ thisUseremail }}</p>
   </div>
 </template>
@@ -26,14 +26,29 @@ export default {
     }
   },
 
+  computed: {
+    username() {
+      return this.$store.state.user.username
+    },
+    email() {
+      return this.$store.state.user.email
+    }
+  },
+  
   methods: {
     async getPerson() {
       const { variables } = {
         id: this.username,
       };
+      const { myState } = {
+        state: this.$store,
+      };
+      const { myUser } = myState.user;
       
-      console.log("STORE STATE: ", this.$store.state)
-      console.log("USERNAME: ", this.username);
+      console.log("STORE STATE: ", this.$store.getters.user)
+      console.log("STORE STATE: ", this.$store.getters.user.username)
+      console.log("USERNAME1: ", this.username);
+      console.log("USERNAME2: ", this.myUser.username);
 
       const user = await API.graphql({
         query: getPerson,
@@ -44,15 +59,6 @@ export default {
       this.thisUsername = user.userName;
     }
   },
-  
-  computed: {
-    username() {
-      return this.$store.state.user.username
-    },
-    email() {
-      return this.$store.state.user.email
-    }
-  }
 }
 </script>
 
