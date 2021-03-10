@@ -1,37 +1,64 @@
 <template>
   <div id="app">
-    <h1>Tasks</h1>
-    <input type="text" v-model="title" placeholder="Task Title">
-    <input type="text" v-model="description" placeholder="Task description">
-    <button v-on:click="createTask">Create Task</button>
-  
-    <b-row>
-      <b-col>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Created</th>
-              <th>Updated</th>
-              <th>&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in todos" :key="item.id">
-              <td>{{ item.title }}</td>
-              <td>{{ item.description }}</td>
-              <td>{{ item.createdAt }}</td>
-              <td>{{ item.updatedAt }}</td>
-              <td class="text-right">
-                <button v-on:click="">Edit Task</button>
-                <a href="#" @click.prevent="deleteTask(item.id)">Delete</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </b-col>
-    </b-row>
+    <div class="p-d-flex">Flex Container</div>
+      <h1>Tasks</h1>
+      <div class="p-formgroup-inline">
+        <div class="p-field">
+            <label for="title" class="p-sr-only">Title</label>
+            <InputText id="title" type="text" placeholder="Title" />
+        </div>
+        <div class="p-field">
+            <label for="description" class="p-sr-only">Description</label>
+            <InputText id="description" type="text" placeholder="Description" />
+        </div>
+        <div class="p-field">
+            <label for="points" class="p-sr-only">Points</label>
+            <InputText id="points" type="text" placeholder="Points" />
+        </div>
+        <button type="button" v-on:click="createTask">Create Task</button>
+      </div>
+    </div>
+    
+    <div class="p-d-flex">Flex Container</div>
+      <DataTable :value="tasks">
+        <Column field="title" header="Title"></Column>
+        <Column field="description" header="Description"></Column>
+        <Column field="points" header="Points"></Column>
+        <Column field="created" header="Created"></Column>
+        <Column field="updated" header="Updated"></Column>
+        <Column field="actions" header="Actions"></Column>
+      </DataTable>
+    </div>
+
+    <div class="p-d-flex">Flex Container</div>
+      <b-row>
+        <b-col>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in todos" :key="item.id">
+                <td>{{ item.title }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.createdAt }}</td>
+                <td>{{ item.updatedAt }}</td>
+                <td class="text-right">
+                  <button v-on:click="">Edit Task</button>
+                  <a href="#" @click.prevent="deleteTask(item.id)">Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -41,6 +68,9 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { createTask, deleteTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
 import { onCreateTask, onDeleteTask } from '../graphql/subscriptions';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+
 
 const subscription = API.graphql(graphqlOperation(onCreateTask)).subscribe({
   next: (eventData) => {
