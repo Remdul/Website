@@ -37,15 +37,15 @@ export default {
     async getPerson() {
       const { attributes } = await Auth.currentUserInfo();
       console.log("STORE STATE: ", this.$store.state)
-      console.log("USERNAME1: ", attributes);
+      console.log("USERNAME1: ", attributes.sub);
 
       const variables = {
-        id: attributes.username,
+        id: attributes.sub,
       };
 
       const user = await API.graphql({
         query: getPerson,
-        variables: {id: variables},
+        variables: {userSub: variables},
       });
       console.log("USER: ", user)
       this.thisUseremail = user.email;
