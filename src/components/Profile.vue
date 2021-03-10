@@ -45,7 +45,7 @@ export default {
 
       const user = await API.graphql({
         query: getPerson,
-        variables: {userSub: variables},
+        variables: {id: variables},
       });
       console.log("USER: ", user)
       this.thisUseremail = user.email;
