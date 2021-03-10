@@ -60,6 +60,7 @@
 
 
 <script>
+import 'primeflex/primeflex.css';
 import { API } from 'aws-amplify';
 import { createTask, deleteTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
