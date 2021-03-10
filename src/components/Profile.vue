@@ -43,12 +43,12 @@ export default {
       const { myState } = {
         state: this.$store,
       };
-      const { myUser } = myState.user;
+
       
       console.log("STORE STATE: ", this.$store.getters.user)
       console.log("STORE STATE: ", this.$store.getters.user.username)
       console.log("USERNAME1: ", this.username);
-      console.log("USERNAME2: ", this.myUser.username);
+      console.log("USERNAME2: ", this.myState);
 
       const user = await API.graphql({
         query: getPerson,
