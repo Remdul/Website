@@ -26,6 +26,11 @@ const store = new Vuex.Store({
     isAuthenticated: false,
     user: {}
   },
+  
+  getters: {
+    user: (state) => state.user
+  },
+
   actions,
   mutations
 })
