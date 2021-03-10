@@ -18,20 +18,23 @@ export default {
   async created(){
     this.getPerson();
   },
-  
+
   data() {
     return {
       thisUsername: '',  
       thisUseremail: '',  
     }
   },
-  
+
   methods: {
     async getPerson() {
-      console.log("STORE USER: ", this.$store.state.user.username)
+      const { variables } = {
+        id: this.$store.state.user.username,
+      };
+      console.log("STORE STATE: ", this.$store.state)
       const user = await API.graphql({
         query: getPerson,
-        variables: {input: this.$store.state.user.username},
+        variables: {id: variables},
       });
       console.log("USER: ", user)
       this.thisUseremail = user.email;
