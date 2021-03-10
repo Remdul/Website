@@ -10,7 +10,7 @@
 <script>
 
 import { getPerson } from '../graphql/queries';
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, Auth } from 'aws-amplify';
 
 export default {
   name: 'home',
@@ -36,22 +36,21 @@ export default {
   
   methods: {
     async getPerson() {
+      const { attributes } = await Auth.currentAuthenticatedUser();
       console.log("STORE STATE: ", this.$store.state)
-      console.log("USERNAME1: ", this.thisUser);
+      console.log("USERNAME1: ", attributes.username);
 
       const variables = {
-        id: this.thisUser.username,
+        id: attributes.username,
       };
-      console.log("USER: ", variables)
-      
 
-      //const user = await API.graphql({
-      //  query: getPerson,
-      //  variables: {id: variables},
-      //});
-      //console.log("USER: ", user)
-      //this.thisUseremail = user.email;
-      //this.thisUsername = user.userName;
+      const user = await API.graphql({
+        query: getPerson,
+        variables: {id: variables},
+      });
+      console.log("USER: ", user)
+      this.thisUseremail = user.email;
+      this.thisUsername = user.userName;
     }
   },
 }
