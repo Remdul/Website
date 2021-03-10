@@ -27,7 +27,7 @@ export default {
   },
 
   computed: {
-    username() {
+    getUserName() {
       return this.$store.state.user.username
     },
     email() {
@@ -37,17 +37,12 @@ export default {
   
   methods: {
     async getPerson() {
-      const { variables } = {
-        id: this.username,
-      };
-      const { myState } = {
-        state: this.$store,
-      };
-
-      
-      console.log("STORE STATE: ", this.$store.state.user.e)
-      console.log("USERNAME1: ", this.username);
+      console.log("STORE STATE: ", this.$store.state)
+      console.log("USERNAME1: ", this.getUserName);
       console.log("USERNAME2: ", this.myState);
+      const variables = {
+        id: this.getUserName,
+      };
 
       const user = await API.graphql({
         query: getPerson,
