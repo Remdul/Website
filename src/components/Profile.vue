@@ -2,7 +2,7 @@
   <div class='container'>
     <h1>Yo, {{ getUserName }}</h1>
     <p>Here's all your info:</p>
-    <p>Username: {{ username }}</p>
+    <p>Username: {{ thisUsername }}</p>
     <p>Email: {{ thisUseremail }}</p>
   </div>
 </template>

@@ -25,6 +25,10 @@ import Calendar from './components/Calendar.vue'
 // Vuex store
 import store from './store'
 
+// Primeflex
+import 'primeflex/primeflex.css';
+
+
 // global styles
 require('./assets/main.css')
 
