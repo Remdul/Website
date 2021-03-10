@@ -31,7 +31,6 @@ export default {
         const user = await this.$Amplify.Auth.signIn(this.form.username, this.form.password)
         this.$store.dispatch('setIsAuthenticated', true)
         this.$store.dispatch('setUser', user)
-        console.log("USER AT SIGNIN: ", user)
         this.$router.push('profile')
       } catch (err) {
         console.log('error: ', err)

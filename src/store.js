@@ -17,18 +17,18 @@ const mutations = {
      state.isAuthenticated = isAuthenticated
    },
    setUser(state, user) {
-    state._user = user
+    state.user = user
   }
 }
 
 const store = new Vuex.Store({
   state: {
     isAuthenticated: false,
-    _user: {}
+    user: {}
   },
   
   getters: {
-    user: (state) => state._user
+    user: (state) => state.user
   },
 
   actions,
