@@ -17,7 +17,6 @@ export default {
   
   async created(){
     this.getPerson();
-    this.thisUser = this.$store.getters.user;
   },
 
   data() {
@@ -36,7 +35,7 @@ export default {
   
   methods: {
     async getPerson() {
-      const { attributes } = await Auth.currentAuthenticatedUser();
+      const { attributes } = await Auth.currentUserInfo();
       console.log("STORE STATE: ", this.$store.state)
       console.log("USERNAME1: ", attributes);
 
