@@ -45,8 +45,7 @@ export default {
       };
 
       
-      console.log("STORE STATE: ", this.$store.getters.user)
-      console.log("STORE STATE: ", this.$store.getters.user.username)
+      console.log("STORE STATE: ", this.$store.state.user)
       console.log("USERNAME1: ", this.username);
       console.log("USERNAME2: ", this.myState);
 
