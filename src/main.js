@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Amplify, * as AmplifyModules from 'aws-amplify'
 import { AmplifyPlugin } from 'aws-amplify-vue'
 import aws_exports from './aws-exports'
+import PrimeVue from 'primevue/config';
 
 Amplify.configure(aws_exports);
 
@@ -71,6 +72,7 @@ router.beforeResolve((to, _, next) => {
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(AmplifyPlugin, AmplifyModules)
+Vue.use(PrimeVue)
 
 new Vue({
   render: v => v(App),

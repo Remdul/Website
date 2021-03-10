@@ -17,9 +17,7 @@
         </div>
         <button type="button" v-on:click="createTask">Create Task</button>
       </div>
-    </div>
-    
-    <div class="p-d-flex">Flex Container</div>
+
       <DataTable :value="tasks">
         <Column field="title" header="Title"></Column>
         <Column field="description" header="Description"></Column>
@@ -28,9 +26,7 @@
         <Column field="updated" header="Updated"></Column>
         <Column field="actions" header="Actions"></Column>
       </DataTable>
-    </div>
 
-    <div class="p-d-flex">Flex Container</div>
       <b-row>
         <b-col>
           <table class="table table-striped">
@@ -59,26 +55,26 @@
         </b-col>
       </b-row>
     </div>
-  </div>
+
 </template>
 
 
 <script>
-import { API, graphqlOperation } from 'aws-amplify';
+import { API } from 'aws-amplify';
 import { createTask, deleteTask } from '../graphql/mutations';
 import { listTasks } from '../graphql/queries';
-import { onCreateTask, onDeleteTask } from '../graphql/subscriptions';
+//import { onCreateTask, onDeleteTask } from '../graphql/subscriptions';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 
 
-const subscription = API.graphql(graphqlOperation(onCreateTask)).subscribe({
-  next: (eventData) => {
-    let todo = eventData.value.data.onCreateTask;
-    if (this.todos.some(item => item.id === todo.id)) return; // remove duplications
-    this.todos = [...this.todos, todo];
-  }
-});
+//const subscription = API.graphql(graphqlOperation(onCreateTask)).subscribe({
+//  next: (eventData) => {
+    //let todo = eventData.value.data.onCreateTask;
+    //if (this.todos.some(item => item.id === todo.id)) return; // remove duplications
+    //this.todos = [...this.todos, todo];
+  //}
+//});
 
 export default {
   name: 'app',
