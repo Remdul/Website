@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 import Amplify, * as AmplifyModules from 'aws-amplify'
 import { AmplifyPlugin } from 'aws-amplify-vue'
 import aws_exports from './aws-exports'
-import PrimeVue from 'primevue/config';
+import Vuelidate from 'vuelidate'
 
 Amplify.configure(aws_exports);
 
@@ -24,6 +24,7 @@ import Family from './components/Family.vue'
 import myCalendar from './components/Calendar.vue'
 
 //PrimeVUE
+import PrimeVue from 'primevue/config';
 
 import AutoComplete from 'primevue/autocomplete/AutoComplete';
 import Accordion from 'primevue/accordion/Accordion';
@@ -207,11 +208,17 @@ Vue.component('Galleria', Galleria);
 import store from './store'
 
 // Primeflex
+import 'primevue/resources/primevue.min.css';
 import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
+import 'primevue/resources/themes/nova/theme.css';
+
+
 
 
 // global styles
-require('./assets/main.css')
+//require('./assets/main.css')
+
 
 // route configuration
 const routes = [
@@ -237,7 +244,7 @@ router.beforeResolve((to, _, next) => {
         next()
       } 
     }).catch((e) => {
-      console.log('You are trying to access a protected route. Please sign in.')
+      console.log('You are trying to access a protected route. Please sign in.', e)
       next({
         path: '/',
         query: {
@@ -248,11 +255,26 @@ router.beforeResolve((to, _, next) => {
   }
   next()
 })
-
-Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(AmplifyPlugin, AmplifyModules)
-Vue.use(PrimeVue)
+Vue.use(PrimeVue, {ripple: true});
+Vue.use(Vuelidate);
+Vue.use(ToastService);
+Vue.use(ConfirmationService);
+
+Vue.directive('badge', BadgeDirective);
+Vue.directive('tooltip', Tooltip);
+Vue.directive('ripple', Ripple);
+
+Vue.prototype.$appState = Vue.observable({inputStyle: 'outlined', darkTheme: false});
+
+Vue.config.productionTip = false;
+
+
+router.beforeEach(function (to, from, next) {
+    window.scrollTo(0, 0);
+    next();
+});
 
 new Vue({
   render: v => v(App),

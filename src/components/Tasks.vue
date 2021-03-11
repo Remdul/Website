@@ -1,85 +1,102 @@
 <template>
-  <div id="app">
-    <div class="p-d-flex">Flex Container</div>
-      <h1>Tasks</h1>
-      <div class="p-formgroup-inline">
-        <div class="p-field">
-            <label for="title" class="p-sr-only">Title</label>
-            <InputText id="title" type="text" placeholder="Title" />
-        </div>
-        <div class="p-field">
-            <label for="description" class="p-sr-only">Description</label>
-            <InputText id="description" type="text" placeholder="Description" />
-        </div>
-        <div class="p-field">
-            <label for="points" class="p-sr-only">Points</label>
-            <InputText id="points" type="text" placeholder="Points" />
-        </div>
-        <button type="button" v-on:click="createTask">Create Task</button>
-      </div>
-
-      <DataTable :value="tasks">
-        <Column field="title" header="Title"></Column>
-        <Column field="description" header="Description"></Column>
-        <Column field="points" header="Points"></Column>
-        <Column field="created" header="Created"></Column>
-        <Column field="updated" header="Updated"></Column>
-        <Column field="actions" header="Actions"></Column>
+   <div id="app">
+      <Toolbar class="p-mb-4">
+         <template #left>
+            <Button label="New" icon="pi pi-plus" class="p-button-success p-mr-2" @click="openNew" />
+            <Button label="Delete" icon="pi pi-trash" class="p-button-danger" @click="confirmDeleteSelected" :disabled="!selectedTasks || !selectedTasks.length" />
+         </template>
+         <template #right>
+            <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" chooseLabel="Import" class="p-mr-2" />
+            <Button label="Export" icon="pi pi-upload" class="p-button-help" @click="exportCSV($event)"  />
+         </template>
+      </Toolbar>
+      <DataTable ref="dt" :value="tasks" :selection.sync="selectedTasks" dataKey="id"
+         :paginator="true" :rows="10" :filters="filters"
+         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5,10,25]"
+         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks">
+         <template #header>
+            <div class="table-header">
+               <h5 class="p-m-0">Manage Tasks</h5>
+               <span class="p-input-icon-left">
+                  <i class="pi pi-search" />
+                  <InputText v-model="filters['global']" placeholder="Search..." />
+               </span>
+            </div>
+         </template>
+         <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
+         <Column field="title" header="Title" sortable></Column>
+         <Column field="description" header="Description" sortable></Column>
+         <Column header="Image">
+            <template #body="slotProps">
+               <img :src="'demo/images/task/' + slotProps.data.image" :alt="slotProps.data.image" class="task-image" />
+            </template>
+         </Column>
+         <Column field="value" header="Value" sortable></Column>
+         <Column field="category" header="Category" sortable></Column>
+         <Column>
+            <template #body="slotProps">
+               <Button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" @click="editTask(slotProps.data)" />
+               <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteTask(slotProps.data)" />
+            </template>
+         </Column>
       </DataTable>
 
-      <b-row>
-        <b-col>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>&nbsp;</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in todos" :key="item.id">
-                <td>{{ item.title }}</td>
-                <td>{{ item.description }}</td>
-                <td>{{ item.createdAt }}</td>
-                <td>{{ item.updatedAt }}</td>
-                <td class="text-right">
-                  <button v-on:click="">Edit Task</button>
-                  <a href="#" @click.prevent="deleteTask(item.id)">Delete</a>
-                  <a href="#" @click.prevent="completeTask(item.id)">Complete</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </b-col>
-      </b-row>
-    </div>
+   <Dialog :visible.sync="taskDialog" :style="{width: '450px'}" header="Task Details" :modal="true" class="p-fluid">
+      <img :src="'demo/images/task/' + task.image" :alt="task.image" class="task-image" v-if="task.image" />
+      <div class="p-field">
+         <label for="title">Title</label>
+         <InputText id="title" v-model.trim="task.title" required="true" autofocus :class="{'p-invalid': submitted && !task.title}" />
+         <small class="p-invalid" v-if="submitted && !task.title">A Title is required.</small>
+      </div>
+      <div class="p-field">
+         <label for="description">Description</label>
+         <Textarea id="description" v-model="task.description" required="true" rows="3" cols="20" />
+      </div>
 
+      <div class="p-formgrid p-grid">
+         <div class="p-field p-col">
+            <label for="value">Value</label>
+            <InputNumber id="value" v-model="task.value" integeronly />
+         </div>
+      </div>
+      <template #footer>
+         <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="hideDialog"/>
+         <Button label="Save" icon="pi pi-check" class="p-button-text" @click="saveTask" />
+      </template>
+   </Dialog>
+   <Dialog :visible.sync="deleteTaskDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+      <div class="confirmation-content">
+         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
+         <span v-if="task">Are you sure you want to delete <b>{{task.title}}</b>?</span>
+      </div>
+      <template #footer>
+         <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteTaskDialog = false"/>
+         <Button label="Yes" icon="pi pi-check" class="p-button-text" @click="deleteTask" />
+      </template>
+   </Dialog>
+   <Dialog :visible.sync="deleteTasksDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+      <div class="confirmation-content">
+         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
+         <span v-if="task">Are you sure you want to delete the selected tasks?</span>
+      </div>
+      <template #footer>
+         <Button label="No" icon="pi pi-times" class="p-button-text" @click="deleteTasksDialog = false"/>
+         <Button label="Yes" icon="pi pi-check" class="p-button-text" @click="deleteSelectedTasks" />
+      </template>
+   </Dialog>
+  </div>
 </template>
 
 
 <script>
-import 'primeflex/primeflex.css';
 import { API } from 'aws-amplify';
 import { createTask, deleteTask, updateTask } from '../graphql/mutations';
 import { listTasks, getTask } from '../graphql/queries';
-//import { onCreateTask, onDeleteTask } from '../graphql/subscriptions';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
 
-
-//const subscription = API.graphql(graphqlOperation(onCreateTask)).subscribe({
-//  next: (eventData) => {
-    //let todo = eventData.value.data.onCreateTask;
-    //if (this.todos.some(item => item.id === todo.id)) return; // remove duplications
-    //this.todos = [...this.todos, todo];
-  //}
-//});
 
 export default {
   name: 'app',
+
 
   async created(){
     this.getTodos();
@@ -89,23 +106,25 @@ export default {
     return {
       title: '',
       description: '',
-      todos: []
+      value: 0,
+      todos: null,
+      selectedTask: null,
+      tasks: null,
+      taskDialog: false,
+      deleteTaskDialog: false,
+      deleteTasksDialog: false,
+      task: {},
+      selectedTasks: null,
+      filters: {},
+      submitted: false
+
+
     }
   },
-  
+
+  taskService: null,
+
   methods: {
-    async createTask() {
-      const { title, description } = this;
-      if (!title || !description) return;
-      const todo = { title, description };
-      await API.graphql({
-        query: createTask,
-        variables: {input: todo},
-      });
-      this.title = '';
-      this.description = '';
-    },
-    
     async completeTask(pid){
       const details = {
         id: pid,
@@ -115,48 +134,138 @@ export default {
         query: getTask,
         variables: {input: details},
       });
+      console.log("Complete: ", task)
       
     },
-    
-    async deleteTask(pid){
-      const details = {
-        id: pid,
-        _version: 1,
-      };
-      
-      if (confirm('Are you sure you want to delete this task?')) {
-        await API.graphql({
-          query: deleteTask,
-          variables: {input: details},
-        });
-      }
-    },
-    
+
     async getTodos() {
       const todos = await API.graphql({
         query: listTasks
       });
-      this.todos = todos.data.listTasks.items.filter(item => item._deleted !== true);
+      this.tasks = todos.data.listTasks.items.filter(item => item._deleted !== true);
+    },
+  
+    openNew() {
+      this.task = {};
+      this.submitted = false;
+      this.taskDialog = true;
+    },
+  
+    hideDialog() {
+      this.taskDialog = false;
+      this.submitted = false;
+    },
+  
+    async saveTask() {
+      this.submitted = true;
+      if (this.task.title.trim()) {
+        if (this.task.id) {
+          console.log("Existing Task Save")
+          
+          const taskDetails = {
+            id: this.task.id,
+            title: this.task.title.trim(),
+            description: this.task.description.trim(),
+            value: this.task.value,
+          };
+          
+          const exTask = await API.graphql({
+            query: updateTask,
+            variables: { input: taskDetails },
+          });
+          console.log ("ExTask: ", exTask)
+
+          this.$set(this.tasks, this.findIndexById(this.task.id), this.task);
+          this.$toast.add({severity:'success', summary: 'Successful', detail: 'Task Updated', life: 3000});
+        }
+        else {
+          console.log("New Task Save")
+          
+          const taskDetails = {
+            id: this.createId,
+            title: this.task.title.trim(),
+            description: this.task.description.trim(),
+            value: this.task.value,
+            //photo: this.task.image = 'task-placeholder.svg';
+          };
+          
+          const newTask = await API.graphql({
+            query: createTask,
+            variables: { input: taskDetails },
+          });
+          
+          console.log ("NewTask: ", newTask)          
+          this.tasks.push(this.task);
+          this.$toast.add({severity:'success', summary: 'Successful', detail: 'Task Created', life: 3000});
+        }
+  
+        this.taskDialog = false;
+        this.task = {};
+      }
+    },
+  
+    editTask(task) {
+      this.task = {...task};
+      this.taskDialog = true;
+    },
+  
+    confirmDeleteTask(task) {
+      this.task = task;
+      this.deleteTaskDialog = true;
+    },
+  
+    async deleteTask() {
+      this.tasks = this.tasks.filter(val => val.id !== this.task.id);
+      this.deleteTaskDialog = false;
+
+      await API.graphql({
+        query: deleteTask,
+        variables: {input: this.task.id},
+      });
+      
+      this.task = {};
+      this.$toast.add({severity:'success', summary: 'Successful', detail: 'Task Deleted', life: 3000});      
+      
+    },
+    findIndexById(id) {
+      let index = -1;
+      for (let i = 0; i < this.tasks.length; i++) {
+        if (this.tasks[i].id === id) {
+          index = i;
+          break;
+        }
+      }
+  
+      return index;
+    },
+  
+    exportCSV() {
+      this.$refs.dt.exportCSV();
+    },
+  
+    confirmDeleteSelected() {
+      this.deleteTasksDialog = true;
+    },
+  
+    deleteSelectedTasks() {
+      this.tasks = this.tasks.filter(val => !this.selectedTasks.includes(val));
+      this.deleteTasksDialog = false;
+      this.selectedTasks = null;
+      this.$toast.add({severity:'success', summary: 'Successful', detail: 'Tasks Deleted', life: 3000});
     }
   },
-};
+  
+  createId() {
+    let id = '';
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for ( var i = 0; i < 5; i++ ) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  },
+
+  
+}
+
 
 </script>
-
-<style scoped>
-.container {
-  padding-top: 80px;
-  width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.container h1 {
-  margin-bottom: 0px;
-}
-.container p {
-  font-size: 18px;
-  text-align: left;
-}
-</style>

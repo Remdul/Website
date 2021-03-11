@@ -1,31 +1,41 @@
-html, body {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  background-color: aliceblue;
-}
+.flexgrid-demo {
+    .box {
+        background-color: var(--surface-e);
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    }
 
-* {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+    .box-stretched {
+        height: 100%;
+    }
 
-input {
-  height: 34px;
-  width: 248px;
-  font-size: 18px;
-  text-align: left;
-  padding: 7px;
-  border: none;
-  outline: none;
-  margin: 5px;
-  border-bottom: 2px solid #2c3e50;
-  background-color: aliceblue;
-}
+    .vertical-container {
+        margin: 0;
+        height: 200px;
+        background: var(--surface-d);
+        border-radius: 4px;
+    }
 
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px aliceblue inset;
+    .nested-grid .p-col-4 {
+        padding-bottom: 1rem;
+    }
+
+    .dynamic-box-enter-active, .dynamic-box-leave-active {
+        transition: all .5s;
+    }
+
+    .dynamic-box-enter, .dynamic-box-leave-to {
+        opacity: 0;
+    }
+
+    .dynamic-box-enter, .dynamic-box-leave-to {
+        transform: translateX(30px);
+    }
+
+    p {
+        margin: 0;
+    }
 }

@@ -1,16 +1,39 @@
 <template>
-  <div class='container'>
-    <h1>Yo, {{ getUserName }}</h1>
-    <p>Here's all your info:</p>
-    <p>Username: {{ thisUsername }}</p>
-    <p>Email: {{ thisUseremail }}</p>
-  </div>
+
+<div class="p-grid p-flex-column">
+	<div class="p-col">
+		<Panel header="Profile">
+      <div class="p-grid nested-grid">
+      	<div class="p-col-8">
+      		<div class="p-grid">
+      			<div class="p-col-6">
+      				<div class="box">Username: {{ thisUsername }}</div>
+      			</div>
+      			<div class="p-col-6">
+      				<div class="box">Email: {{ thisUseremail }}</div>
+      			</div>
+      			<div class="p-col-12">
+      				<div class="box">12</div>
+      			</div>
+      		</div>
+      	</div>
+      	<div class="p-col-4">
+      		<div class="box box-stretched">4</div>
+      	</div>
+      </div>
+			</Panel>
+		</div>
+	</div>
+</div>
+
+
 </template>
 
 <script>
 
 import { getPerson } from '../graphql/queries';
 import { API, Auth } from 'aws-amplify';
+import 'primeflex/primeflex.css';
 
 export default {
   name: 'home',
@@ -52,21 +75,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.container {
-  padding-top: 80px;
-  width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.container h1 {
-  margin-bottom: 0px;
-}
-.container p {
-  font-size: 18px;
-  text-align: left;
-}
-</style>
