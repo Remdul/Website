@@ -1,32 +1,28 @@
 <template>
-
 <div class="p-grid p-flex-column">
-	<div class="p-col">
-		<Panel header="Profile">
-      <div class="p-grid nested-grid">
-      	<div class="p-col-8">
-      		<div class="p-grid">
-      			<div class="p-col-6">
-      				<div class="box">Username: {{ thisUsername }}</div>
-      			</div>
-      			<div class="p-col-6">
-      				<div class="box">Email: {{ thisUseremail }}</div>
-      			</div>
-      			<div class="p-col-12">
-      				<div class="box">12</div>
-      			</div>
-      		</div>
-      	</div>
-      	<div class="p-col-4">
-      		<div class="box box-stretched">4</div>
-      	</div>
-      </div>
-			</Panel>
-		</div>
-	</div>
+   <div class="p-col">
+      <Panel header="Profile">
+         <div class="p-grid nested-grid">
+            <div class="p-col-8">
+               <div class="p-grid">
+                  <div class="p-col-6">
+                     <div class="box">Username: {{ thisUsername }}</div>
+                  </div>
+                  <div class="p-col-6">
+                     <div class="box">Email: {{ thisUseremail }}</div>
+                  </div>
+                  <div class="p-col-12">
+                     <div class="box">12</div>
+                  </div>
+               </div>
+            </div>
+            <div class="p-col-4">
+               <div class="box box-stretched">4</div>
+            </div>
+         </div>
+      </Panel>
+   </div>
 </div>
-
-
 </template>
 
 <script>
