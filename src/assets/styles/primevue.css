@@ -1,0 +1,9 @@
+@import '../../../node_modules/primevue/common/Common.css';
+@import '../../../node_modules/primevue/badge/Badge.css';
+@import '../../../node_modules/primevue/button/Button.css';
+@import '../../../node_modules/primevue/checkbox/Checkbox.css';
+@import '../../../node_modules/primevue/colorpicker/ColorPicker.css';
+@import '../../../node_modules/primevue/inputtext/InputText.css';
+@import '../../../node_modules/primevue/radiobutton/RadioButton.css';
+@import '../../../node_modules/primevue/ripple/Ripple.css';
+@import '../../../node_modules/primevue/tooltip/Tooltip.css';
