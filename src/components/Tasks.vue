@@ -143,6 +143,7 @@ export default {
         query: listTasks
       });
       this.tasks = todos.data.listTasks.items.filter(item => item._deleted !== true);
+      
     },
   
     openNew() {
