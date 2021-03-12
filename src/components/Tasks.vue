@@ -188,7 +188,7 @@ export default {
             title: this.task.title.trim(),
             description: this.task.description.trim(),
             value: Number(this.task.value),
-            completed: false,
+            //completed: false,
             //photo: this.task.image = 'task-placeholder.svg';
           };
           
@@ -231,7 +231,7 @@ export default {
         title: this.task.title.trim(),
         description: this.task.description.trim(),
         value: Number(this.task.value),
-        completed: true,
+        //completed: true,
       };
       
       await API.graphql({

@@ -6,7 +6,6 @@ export const onCreateFamily = /* GraphQL */ `
     onCreateFamily(owner: $owner) {
       id
       familyName
-      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -41,7 +40,6 @@ export const onUpdateFamily = /* GraphQL */ `
     onUpdateFamily(owner: $owner) {
       id
       familyName
-      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -76,7 +74,6 @@ export const onDeleteFamily = /* GraphQL */ `
     onDeleteFamily(owner: $owner) {
       id
       familyName
-      inviteID
       _version
       _deleted
       _lastChangedAt

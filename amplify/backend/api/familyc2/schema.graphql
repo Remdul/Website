@@ -30,6 +30,7 @@ type Task @model @auth(rules: [{allow: private, operations: [read, update, creat
   repeatHours: Int
   personID: ID
   AssignedTo: [Person] @connection(keyName: "byTask", fields: ["id"])
+  completed: Boolean
 }
 
 type PrivateNote @model @auth(rules: [{allow: owner}]) {

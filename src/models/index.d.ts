@@ -48,6 +48,7 @@ export declare class Task {
   readonly repeatHours?: number;
   readonly personID?: string;
   readonly AssignedTo?: (Person | null)[];
+  readonly completed?: boolean;
   constructor(init: ModelInit<Task>);
   static copyOf(source: Task, mutator: (draft: MutableModel<Task>) => MutableModel<Task> | void): Task;
 }

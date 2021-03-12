@@ -397,6 +397,13 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "taskID"
                     }
+                },
+                "completed": {
+                    "name": "completed",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -493,5 +500,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "1a5c51f70aa8650f899f945e727c301d"
+    "version": "056533b2b2eb4561fa9bf9d2f1ec5dce"
 };

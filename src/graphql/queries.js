@@ -6,7 +6,6 @@ export const getFamily = /* GraphQL */ `
     getFamily(id: $id) {
       id
       familyName
-      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -46,7 +45,6 @@ export const listFamilys = /* GraphQL */ `
       items {
         id
         familyName
-        inviteID
         _version
         _deleted
         _lastChangedAt
@@ -79,7 +77,6 @@ export const syncFamilies = /* GraphQL */ `
       items {
         id
         familyName
-        inviteID
         _version
         _deleted
         _lastChangedAt
