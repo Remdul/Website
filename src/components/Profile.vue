@@ -17,7 +17,8 @@
                </div>
             </div>
             <div class="p-col-4">
-               <div class="box box-stretched">4</div>
+               <div class="box">FamilyID: {{ thisUserFamily }}</div>
+
             </div>
          </div>
       </Panel>
@@ -43,6 +44,7 @@ export default {
       thisUseremail: '',
       thisUsername: '',
       thisUserpoints: 0,
+      thisUserFamily: null,
     }
   },
 
@@ -66,6 +68,7 @@ export default {
       this.thisUseremail = user.data.getPerson.email;
       this.thisUsername = user.data.getPerson.userName;
       this.thisUserpoints = user.data.getPerson.points;
+      this.thisUserFamily = user.data.getPerson.familyID;
     }
   },
 }

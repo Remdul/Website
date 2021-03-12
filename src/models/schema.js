@@ -30,6 +30,20 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "Tasks": {
+                    "name": "Tasks",
+                    "isArray": true,
+                    "type": {
+                        "model": "Task"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "familyID"
+                    }
                 }
             },
             "syncable": true,
@@ -404,6 +418,13 @@ export const schema = {
                     "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
+                },
+                "familyID": {
+                    "name": "familyID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -419,6 +440,15 @@ export const schema = {
                         "name": "byPerson",
                         "fields": [
                             "personID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byFamily",
+                        "fields": [
+                            "familyID"
                         ]
                     }
                 },
@@ -500,5 +530,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "056533b2b2eb4561fa9bf9d2f1ec5dce"
+    "version": "ede12bc775e05b04aa7d0c17696ff56f"
 };

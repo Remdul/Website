@@ -8,6 +8,7 @@ export declare class Family {
   readonly id: string;
   readonly People?: (Person | null)[];
   readonly familyName?: string;
+  readonly Tasks?: (Task | null)[];
   constructor(init: ModelInit<Family>);
   static copyOf(source: Family, mutator: (draft: MutableModel<Family>) => MutableModel<Family> | void): Family;
 }
@@ -49,6 +50,7 @@ export declare class Task {
   readonly personID?: string;
   readonly AssignedTo?: (Person | null)[];
   readonly completed?: boolean;
+  readonly familyID?: string;
   constructor(init: ModelInit<Task>);
   static copyOf(source: Task, mutator: (draft: MutableModel<Task>) => MutableModel<Task> | void): Task;
 }

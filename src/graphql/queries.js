@@ -32,6 +32,28 @@ export const getFamily = /* GraphQL */ `
         nextToken
         startedAt
       }
+      Tasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          completed
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -52,6 +74,10 @@ export const listFamilys = /* GraphQL */ `
         updatedAt
         owner
         People {
+          nextToken
+          startedAt
+        }
+        Tasks {
           nextToken
           startedAt
         }
@@ -84,6 +110,10 @@ export const syncFamilies = /* GraphQL */ `
         updatedAt
         owner
         People {
+          nextToken
+          startedAt
+        }
+        Tasks {
           nextToken
           startedAt
         }
@@ -158,6 +188,7 @@ export const getPerson = /* GraphQL */ `
           repeatHours
           personID
           completed
+          familyID
           _version
           _deleted
           _lastChangedAt
@@ -244,6 +275,7 @@ export const listTasks = /* GraphQL */ `
         repeatHours
         personID
         completed
+        familyID
         _version
         _deleted
         _lastChangedAt
@@ -276,6 +308,7 @@ export const getTask = /* GraphQL */ `
       repeatHours
       personID
       completed
+      familyID
       _version
       _deleted
       _lastChangedAt
@@ -342,6 +375,7 @@ export const syncTasks = /* GraphQL */ `
         repeatHours
         personID
         completed
+        familyID
         _version
         _deleted
         _lastChangedAt
@@ -474,6 +508,7 @@ export const syncTaskPeople = /* GraphQL */ `
           repeatHours
           personID
           completed
+          familyID
           _version
           _deleted
           _lastChangedAt

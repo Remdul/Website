@@ -35,6 +35,28 @@ export const deleteFamily = /* GraphQL */ `
         nextToken
         startedAt
       }
+      Tasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          completed
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -63,6 +85,28 @@ export const createFamily = /* GraphQL */ `
           familyID
           points
           taskID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      Tasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          completed
+          familyID
           _version
           _deleted
           _lastChangedAt
@@ -109,6 +153,28 @@ export const updateFamily = /* GraphQL */ `
         nextToken
         startedAt
       }
+      Tasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          completed
+          familyID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -144,6 +210,7 @@ export const createPerson = /* GraphQL */ `
           repeatHours
           personID
           completed
+          familyID
           _version
           _deleted
           _lastChangedAt
@@ -202,6 +269,7 @@ export const updatePerson = /* GraphQL */ `
           repeatHours
           personID
           completed
+          familyID
           _version
           _deleted
           _lastChangedAt
@@ -260,6 +328,7 @@ export const deletePerson = /* GraphQL */ `
           repeatHours
           personID
           completed
+          familyID
           _version
           _deleted
           _lastChangedAt
@@ -302,6 +371,7 @@ export const createTask = /* GraphQL */ `
       repeatHours
       personID
       completed
+      familyID
       _version
       _deleted
       _lastChangedAt
@@ -360,6 +430,7 @@ export const updateTask = /* GraphQL */ `
       repeatHours
       personID
       completed
+      familyID
       _version
       _deleted
       _lastChangedAt
@@ -418,6 +489,7 @@ export const deleteTask = /* GraphQL */ `
       repeatHours
       personID
       completed
+      familyID
       _version
       _deleted
       _lastChangedAt
@@ -560,6 +632,7 @@ export const createTaskPerson = /* GraphQL */ `
         repeatHours
         personID
         completed
+        familyID
         _version
         _deleted
         _lastChangedAt
@@ -626,6 +699,7 @@ export const updateTaskPerson = /* GraphQL */ `
         repeatHours
         personID
         completed
+        familyID
         _version
         _deleted
         _lastChangedAt
@@ -692,6 +766,7 @@ export const deleteTaskPerson = /* GraphQL */ `
         repeatHours
         personID
         completed
+        familyID
         _version
         _deleted
         _lastChangedAt

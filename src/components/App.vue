@@ -25,9 +25,9 @@ export default {
       const user = await this.$Amplify.Auth.currentAuthenticatedUser()
       this.$store.dispatch('setIsAuthenticated', true)
       this.$store.dispatch('setUser', user)
-      this.$router.push('profile')
+      this.$router.push('home')
     } catch (err) {
-      console.log('error: ', err)
+      //console.log('error: ', err)
     }
   },
   computed: {

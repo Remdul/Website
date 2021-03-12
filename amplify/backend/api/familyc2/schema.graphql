@@ -2,6 +2,7 @@ type Family @model @auth(rules: [{allow: owner, operations: [read, create, updat
   id: ID!
   People: [Person] @connection(keyName: "byFamily", fields: ["id"])
   familyName: String
+  Tasks: [Task] @connection(keyName: "byFamily", fields: ["id"])
 }
 
 type Person @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{allow: private, operations: [read, create, update, delete]}]) @key(name: "byTask", fields: ["taskID"]) {
@@ -18,7 +19,7 @@ type Person @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{a
   taskID: ID
 }
 
-type Task @model @auth(rules: [{allow: private, operations: [read, update, create]}, {allow: owner, operations: [read, update, create, delete]}]) @key(name: "byPerson", fields: ["personID"]) {
+type Task @model @auth(rules: [{allow: private, operations: [read, update, create]}, {allow: owner, operations: [read, update, create, delete]}]) @key(name: "byPerson", fields: ["personID"]) @key(name: "byFamily", fields: ["familyID"]) {
   id: ID!
   title: String!
   description: String
@@ -31,6 +32,7 @@ type Task @model @auth(rules: [{allow: private, operations: [read, update, creat
   personID: ID
   AssignedTo: [Person] @connection(keyName: "byTask", fields: ["id"])
   completed: Boolean
+  familyID: ID
 }
 
 type PrivateNote @model @auth(rules: [{allow: owner}]) {
