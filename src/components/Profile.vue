@@ -12,7 +12,7 @@
                      <div class="box">Email: {{ thisUseremail }}</div>
                   </div>
                   <div class="p-col-12">
-                     <div class="box">12</div>
+                     <div class="box">Points: {{ thisUserpoints }}</div>
                   </div>
                </div>
             </div>
@@ -42,6 +42,7 @@ export default {
     return {
       thisUseremail: '',
       thisUsername: '',
+      thisUserpoints: 0,
     }
   },
 
@@ -57,9 +58,6 @@ export default {
   methods: {
     async getPerson() {
       const { attributes } = await Auth.currentUserInfo();
-      console.log("STORE STATE: ", this.$store.state)
-      console.log("USERNAME1: ", attributes.sub);
-
       const user = await API.graphql({
         query: getPerson,
         variables: {id: attributes.sub},
@@ -67,6 +65,7 @@ export default {
       console.log("USER: ", user)
       this.thisUseremail = user.data.getPerson.email;
       this.thisUsername = user.data.getPerson.userName;
+      this.thisUserpoints = user.data.getPerson.points;
     }
   },
 }

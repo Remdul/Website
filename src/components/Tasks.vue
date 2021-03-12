@@ -37,6 +37,7 @@
             <template #body="slotProps">
                <Button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" @click="editTask(slotProps.data)" />
                <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteTask(slotProps.data)" />
+               <Button icon="pi pi-check" class="p-button-rounded p-button-success" @click="confirmCompleteTask(slotProps.data)" />
             </template>
          </Column>
       </DataTable>
@@ -84,14 +85,25 @@
          <Button label="Yes" icon="pi pi-check" class="p-button-text" @click="deleteSelectedTasks" />
       </template>
    </Dialog>
+   <Dialog :visible.sync="completeTaskDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+      <div class="confirmation-content">
+         <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
+         <span v-if="task">Are you sure you completed this task?</span>
+      </div>
+      <template #footer>
+         <Button label="No" icon="pi pi-times" class="p-button-text" @click="completeTaskDialog = false"/>
+         <Button label="Yes" icon="pi pi-check" class="p-button-text" @click="completeTask" />
+      </template>
+   </Dialog>
+
   </div>
 </template>
 
 
 <script>
-import { API } from 'aws-amplify';
-import { createTask, deleteTask, updateTask } from '../graphql/mutations';
-import { listTasks, getTask } from '../graphql/queries';
+import { API, Auth } from 'aws-amplify';
+import { createTask, deleteTask, updateTask, updatePerson } from '../graphql/mutations';
+import { listTasks, getPerson } from '../graphql/queries';
 
 
 export default {
@@ -112,6 +124,7 @@ export default {
       tasks: null,
       taskDialog: false,
       deleteTaskDialog: false,
+      completeTaskDialog: false,
       deleteTasksDialog: false,
       task: {},
       selectedTasks: null,
@@ -125,19 +138,6 @@ export default {
   taskService: null,
 
   methods: {
-    async completeTask(pid){
-      const details = {
-        id: pid,
-      };
-
-      const task = await API.graphql({
-        query: getTask,
-        variables: {input: details},
-      });
-      console.log("Complete: ", task)
-      
-    },
-
     async getTodos() {
       const todos = await API.graphql({
         query: listTasks
@@ -166,7 +166,8 @@ export default {
             id: this.task.id,
             title: this.task.title.trim(),
             description: this.task.description.trim(),
-            value: this.task.value,
+            value: Number(this.task.value),
+            completed: false,
           };
           
           const exTask = await API.graphql({
@@ -185,7 +186,8 @@ export default {
             id: this.createId,
             title: this.task.title.trim(),
             description: this.task.description.trim(),
-            value: this.task.value,
+            value: Number(this.task.value),
+            completed: false,
             //photo: this.task.image = 'task-placeholder.svg';
           };
           
@@ -213,6 +215,53 @@ export default {
       this.task = task;
       this.deleteTaskDialog = true;
     },
+
+    confirmCompleteTask(task) {
+      this.task = task;
+      this.completeTaskDialog = true;
+    },
+
+    async completeTask() {
+      this.tasks = this.tasks.filter(val => val.id !== this.task.id);
+      this.completeTaskDialog = false;
+
+      const taskDetails = {
+        id: this.task.id,
+        title: this.task.title.trim(),
+        description: this.task.description.trim(),
+        value: Number(this.task.value),
+        completed: true,
+      };
+      
+      await API.graphql({
+        query: updateTask,
+        variables: { input: taskDetails },
+      });
+      
+      const { attributes } = await Auth.currentUserInfo();
+      const user = await API.graphql({
+        query: getPerson,
+        variables: {id: attributes.sub},
+      });
+      
+      console.log("Points: ", user.data.getPerson.points)
+      console.log("Points: ", taskDetails.value)
+      const total = Number(user.data.getPerson.points + taskDetails.value)
+      console.log("Total : ", total)
+      const updatesToUser = {
+          id: attributes.sub,
+          points: 5,
+          familyID: "Hi",
+      }
+      const test = await API.graphql({
+        query: updatePerson,
+        variables: { input: updatesToUser },
+      });
+      console.log("TEST: ", test)
+      this.$toast.add({severity:'success', summary: 'Successful', detail: 'Task Completed', life: 3000});      
+      
+    },
+
   
     async deleteTask() {
       this.tasks = this.tasks.filter(val => val.id !== this.task.id);

@@ -23,7 +23,7 @@ type Task @model @auth(rules: [{allow: private, operations: [read, update, creat
   title: String!
   description: String
   status: String
-  value: String
+  value: Int
   Owner: [TaskPerson] @connection(keyName: "byTask", fields: ["id"])
   repeatable: Boolean
   endTime: AWSDateTime

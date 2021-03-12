@@ -41,7 +41,7 @@ export declare class Task {
   readonly title: string;
   readonly description?: string;
   readonly status?: string;
-  readonly value?: string;
+  readonly value?: number;
   readonly Owner?: (TaskPerson | null)[];
   readonly repeatable?: boolean;
   readonly endTime?: string;

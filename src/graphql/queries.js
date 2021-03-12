@@ -6,6 +6,7 @@ export const getFamily = /* GraphQL */ `
     getFamily(id: $id) {
       id
       familyName
+      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -45,6 +46,7 @@ export const listFamilys = /* GraphQL */ `
       items {
         id
         familyName
+        inviteID
         _version
         _deleted
         _lastChangedAt
@@ -77,6 +79,7 @@ export const syncFamilies = /* GraphQL */ `
       items {
         id
         familyName
+        inviteID
         _version
         _deleted
         _lastChangedAt
@@ -157,6 +160,7 @@ export const getPerson = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt
@@ -242,6 +246,7 @@ export const listTasks = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt
@@ -273,6 +278,7 @@ export const getTask = /* GraphQL */ `
       endTime
       repeatHours
       personID
+      completed
       _version
       _deleted
       _lastChangedAt
@@ -338,6 +344,7 @@ export const syncTasks = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt
@@ -469,6 +476,7 @@ export const syncTaskPeople = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt

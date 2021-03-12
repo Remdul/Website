@@ -9,6 +9,7 @@ export const deleteFamily = /* GraphQL */ `
     deleteFamily(input: $input, condition: $condition) {
       id
       familyName
+      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -46,6 +47,7 @@ export const createFamily = /* GraphQL */ `
     createFamily(input: $input, condition: $condition) {
       id
       familyName
+      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -83,6 +85,7 @@ export const updateFamily = /* GraphQL */ `
     updateFamily(input: $input, condition: $condition) {
       id
       familyName
+      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -143,6 +146,7 @@ export const createPerson = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt
@@ -200,6 +204,7 @@ export const updatePerson = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt
@@ -257,6 +262,7 @@ export const deletePerson = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt
@@ -298,6 +304,7 @@ export const createTask = /* GraphQL */ `
       endTime
       repeatHours
       personID
+      completed
       _version
       _deleted
       _lastChangedAt
@@ -355,6 +362,7 @@ export const updateTask = /* GraphQL */ `
       endTime
       repeatHours
       personID
+      completed
       _version
       _deleted
       _lastChangedAt
@@ -412,6 +420,7 @@ export const deleteTask = /* GraphQL */ `
       endTime
       repeatHours
       personID
+      completed
       _version
       _deleted
       _lastChangedAt
@@ -553,6 +562,7 @@ export const createTaskPerson = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt
@@ -618,6 +628,7 @@ export const updateTaskPerson = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt
@@ -683,6 +694,7 @@ export const deleteTaskPerson = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt

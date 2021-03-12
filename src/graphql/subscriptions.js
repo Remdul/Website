@@ -6,6 +6,7 @@ export const onCreateFamily = /* GraphQL */ `
     onCreateFamily(owner: $owner) {
       id
       familyName
+      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -40,6 +41,7 @@ export const onUpdateFamily = /* GraphQL */ `
     onUpdateFamily(owner: $owner) {
       id
       familyName
+      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -74,6 +76,7 @@ export const onDeleteFamily = /* GraphQL */ `
     onDeleteFamily(owner: $owner) {
       id
       familyName
+      inviteID
       _version
       _deleted
       _lastChangedAt
@@ -131,6 +134,7 @@ export const onCreatePerson = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt
@@ -185,6 +189,7 @@ export const onUpdatePerson = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt
@@ -239,6 +244,7 @@ export const onDeletePerson = /* GraphQL */ `
           endTime
           repeatHours
           personID
+          completed
           _version
           _deleted
           _lastChangedAt
@@ -277,6 +283,7 @@ export const onCreateTask = /* GraphQL */ `
       endTime
       repeatHours
       personID
+      completed
       _version
       _deleted
       _lastChangedAt
@@ -331,6 +338,7 @@ export const onUpdateTask = /* GraphQL */ `
       endTime
       repeatHours
       personID
+      completed
       _version
       _deleted
       _lastChangedAt
@@ -385,6 +393,7 @@ export const onDeleteTask = /* GraphQL */ `
       endTime
       repeatHours
       personID
+      completed
       _version
       _deleted
       _lastChangedAt
@@ -514,6 +523,7 @@ export const onCreateTaskPerson = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt
@@ -576,6 +586,7 @@ export const onUpdateTaskPerson = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt
@@ -638,6 +649,7 @@ export const onDeleteTaskPerson = /* GraphQL */ `
         endTime
         repeatHours
         personID
+        completed
         _version
         _deleted
         _lastChangedAt
