@@ -72,7 +72,6 @@ export default {
       createFamilyDialog: false,
       submitted: false,
       members: [],
-      
     }
   },
 
