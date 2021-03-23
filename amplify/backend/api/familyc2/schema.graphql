@@ -1,8 +1,24 @@
-type Family @model @auth(rules: [{allow: owner, operations: [read, create, update]}]) {
+type Reward @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}, {allow: private, operations: [read, create, delete, update]}]) {
+  id: ID!
+  title: String
+  description: String
+  value: Int
+  expires: AWSDateTime
+  RewardPeople: [RewardPerson] @connection(keyName: "byReward", fields: ["id"])
+  repeatable: Boolean
+  repeatHour: Int
+  claimed: Boolean
+  familyID: ID
+  image: String
+}
+
+type Family @model @auth(rules: [{allow: owner, operations: [read, create, update]}, {allow: private, operations: [read, create, update]}]) {
   id: ID!
   People: [Person] @connection(keyName: "byFamily", fields: ["id"])
   familyName: String
   Tasks: [Task] @connection(keyName: "byFamily", fields: ["id"])
+  Rewards: [Reward] @connection(keyName: "byFamily", fields: ["id"])
+  avata: String
 }
 
 type Person @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{allow: private, operations: [read, create, update, delete]}]) @key(name: "byTask", fields: ["taskID"]) {
@@ -17,6 +33,8 @@ type Person @model @key(name: "byFamily", fields: ["familyID"]) @auth(rules: [{a
   points: Int
   ownedTasks: [Task] @connection(keyName: "byPerson", fields: ["id"])
   taskID: ID
+  rewards: [RewardPerson] @connection(keyName: "byPerson", fields: ["id"])
+  avatar: String
 }
 
 type Task @model @auth(rules: [{allow: private, operations: [read, update, create]}, {allow: owner, operations: [read, update, create, delete]}]) @key(name: "byPerson", fields: ["personID"]) @key(name: "byFamily", fields: ["familyID"]) {
@@ -33,6 +51,7 @@ type Task @model @auth(rules: [{allow: private, operations: [read, update, creat
   AssignedTo: [Person] @connection(keyName: "byTask", fields: ["id"])
   completed: Boolean
   familyID: ID
+  image: String
 }
 
 type PrivateNote @model @auth(rules: [{allow: owner}]) {
@@ -45,6 +64,14 @@ type TaskPerson @model(queries: null) @key(name: "byTask", fields: ["taskID", "p
   taskID: ID!
   personID: ID!
   task: Task! @connection(fields: ["taskID"])
+  person: Person! @connection(fields: ["personID"])
+}
+
+type RewardPerson @model(queries: null) @key(name: "byReward", fields: ["rewardID", "personID"]) @key(name: "byPerson", fields: ["personID", "rewardID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}, {allow: private, operations: [read, create, delete, update]}, {allow: private, operations: [read, create, update, delete]}]) {
+  id: ID!
+  rewardID: ID!
+  personID: ID!
+  reward: Reward! @connection(fields: ["rewardID"])
   person: Person! @connection(fields: ["personID"])
 }
  

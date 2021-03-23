@@ -26,5 +26,11 @@
         }
       }
     }
+  },
+  "storage": {
+    "familyc2Store": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
