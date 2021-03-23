@@ -1,5 +1,7 @@
 <template>
   <div>
+    
+    
     <div class='form-container'>
       <h1 class='heading'>Sign In</h1>
       <div class='form'>
@@ -25,6 +27,8 @@
 <script>
 export default {
   name: 'sign-in',
+  
+  
   methods: {
     async signIn() {
       try {

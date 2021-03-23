@@ -1,17 +1,145 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getFamily = /* GraphQL */ `
-  query GetFamily($id: ID!) {
-    getFamily(id: $id) {
+export const listRewards = /* GraphQL */ `
+  query ListRewards(
+    $filter: ModelRewardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRewards(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        value
+        expires
+        repeatable
+        repeatHour
+        claimed
+        familyID
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        RewardPeople {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getReward = /* GraphQL */ `
+  query GetReward($id: ID!) {
+    getReward(id: $id) {
       id
-      familyName
+      title
+      description
+      value
+      expires
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
+      RewardPeople {
+        items {
+          id
+          rewardID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const syncRewards = /* GraphQL */ `
+  query SyncRewards(
+    $filter: ModelRewardFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncRewards(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        description
+        value
+        expires
+        repeatable
+        repeatHour
+        claimed
+        familyID
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        RewardPeople {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getFamily = /* GraphQL */ `
+  query GetFamily($id: ID!) {
+    getFamily(id: $id) {
+      id
+      familyName
+      avata
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
       People {
         items {
           id
@@ -23,6 +151,7 @@ export const getFamily = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -45,6 +174,7 @@ export const getFamily = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -67,12 +197,16 @@ export const listFamilys = /* GraphQL */ `
       items {
         id
         familyName
+        avata
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        owner
+        Rewards {
+          nextToken
+          startedAt
+        }
         People {
           nextToken
           startedAt
@@ -103,12 +237,16 @@ export const syncFamilies = /* GraphQL */ `
       items {
         id
         familyName
+        avata
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        owner
+        Rewards {
+          nextToken
+          startedAt
+        }
         People {
           nextToken
           startedAt
@@ -140,6 +278,7 @@ export const listPersons = /* GraphQL */ `
         familyID
         points
         taskID
+        avatar
         _version
         _deleted
         _lastChangedAt
@@ -150,6 +289,10 @@ export const listPersons = /* GraphQL */ `
           startedAt
         }
         assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
           nextToken
           startedAt
         }
@@ -171,6 +314,7 @@ export const getPerson = /* GraphQL */ `
       familyID
       points
       taskID
+      avatar
       _version
       _deleted
       _lastChangedAt
@@ -189,6 +333,7 @@ export const getPerson = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -202,6 +347,20 @@ export const getPerson = /* GraphQL */ `
         items {
           id
           taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      rewards {
+        items {
+          id
+          rewardID
           personID
           _version
           _deleted
@@ -238,6 +397,7 @@ export const syncPeople = /* GraphQL */ `
         familyID
         points
         taskID
+        avatar
         _version
         _deleted
         _lastChangedAt
@@ -248,6 +408,10 @@ export const syncPeople = /* GraphQL */ `
           startedAt
         }
         assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
           nextToken
           startedAt
         }
@@ -276,6 +440,7 @@ export const listTasks = /* GraphQL */ `
         personID
         completed
         familyID
+        image
         _version
         _deleted
         _lastChangedAt
@@ -309,6 +474,7 @@ export const getTask = /* GraphQL */ `
       personID
       completed
       familyID
+      image
       _version
       _deleted
       _lastChangedAt
@@ -325,6 +491,7 @@ export const getTask = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -376,6 +543,7 @@ export const syncTasks = /* GraphQL */ `
         personID
         completed
         familyID
+        image
         _version
         _deleted
         _lastChangedAt
@@ -491,6 +659,7 @@ export const syncTaskPeople = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -509,6 +678,69 @@ export const syncTaskPeople = /* GraphQL */ `
           personID
           completed
           familyID
+          image
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncRewardPeople = /* GraphQL */ `
+  query SyncRewardPeople(
+    $filter: ModelRewardPersonFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncRewardPeople(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        rewardID
+        personID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        reward {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        person {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          avatar
           _version
           _deleted
           _lastChangedAt

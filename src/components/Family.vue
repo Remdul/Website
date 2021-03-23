@@ -14,7 +14,7 @@
       Members of family:
       <ul id="example-1">
         <li v-for="member in members" :key="member.userName">
-          {{ member.userName }}
+          Name: {{ member.userName }} Points: {{ member.points }}
         </li>
       </ul>
       
@@ -83,6 +83,7 @@ export default {
         variables: {id: attributes.sub},
       });
       this.familyID = user.data.getPerson.familyID;
+      console.log("FAM: ", this.familyID)
       this.getFamily()
     },
     

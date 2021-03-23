@@ -1,17 +1,143 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateFamily = /* GraphQL */ `
-  subscription OnCreateFamily($owner: String) {
-    onCreateFamily(owner: $owner) {
+export const onCreateReward = /* GraphQL */ `
+  subscription OnCreateReward {
+    onCreateReward {
       id
-      familyName
+      title
+      description
+      value
+      expires
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
+      RewardPeople {
+        items {
+          id
+          rewardID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateReward = /* GraphQL */ `
+  subscription OnUpdateReward {
+    onUpdateReward {
+      id
+      title
+      description
+      value
+      expires
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      RewardPeople {
+        items {
+          id
+          rewardID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteReward = /* GraphQL */ `
+  subscription OnDeleteReward {
+    onDeleteReward {
+      id
+      title
+      description
+      value
+      expires
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      RewardPeople {
+        items {
+          id
+          rewardID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onCreateFamily = /* GraphQL */ `
+  subscription OnCreateFamily {
+    onCreateFamily {
+      id
+      familyName
+      avata
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
       People {
         items {
           id
@@ -23,6 +149,7 @@ export const onCreateFamily = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -45,6 +172,7 @@ export const onCreateFamily = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -58,16 +186,37 @@ export const onCreateFamily = /* GraphQL */ `
   }
 `;
 export const onUpdateFamily = /* GraphQL */ `
-  subscription OnUpdateFamily($owner: String) {
-    onUpdateFamily(owner: $owner) {
+  subscription OnUpdateFamily {
+    onUpdateFamily {
       id
       familyName
+      avata
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
       People {
         items {
           id
@@ -79,6 +228,7 @@ export const onUpdateFamily = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -101,6 +251,7 @@ export const onUpdateFamily = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -114,16 +265,37 @@ export const onUpdateFamily = /* GraphQL */ `
   }
 `;
 export const onDeleteFamily = /* GraphQL */ `
-  subscription OnDeleteFamily($owner: String) {
-    onDeleteFamily(owner: $owner) {
+  subscription OnDeleteFamily {
+    onDeleteFamily {
       id
       familyName
+      avata
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
       People {
         items {
           id
@@ -135,6 +307,7 @@ export const onDeleteFamily = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -157,6 +330,7 @@ export const onDeleteFamily = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -181,6 +355,7 @@ export const onCreatePerson = /* GraphQL */ `
       familyID
       points
       taskID
+      avatar
       _version
       _deleted
       _lastChangedAt
@@ -199,6 +374,7 @@ export const onCreatePerson = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -212,6 +388,20 @@ export const onCreatePerson = /* GraphQL */ `
         items {
           id
           taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      rewards {
+        items {
+          id
+          rewardID
           personID
           _version
           _deleted
@@ -237,6 +427,7 @@ export const onUpdatePerson = /* GraphQL */ `
       familyID
       points
       taskID
+      avatar
       _version
       _deleted
       _lastChangedAt
@@ -255,6 +446,7 @@ export const onUpdatePerson = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -268,6 +460,20 @@ export const onUpdatePerson = /* GraphQL */ `
         items {
           id
           taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      rewards {
+        items {
+          id
+          rewardID
           personID
           _version
           _deleted
@@ -293,6 +499,7 @@ export const onDeletePerson = /* GraphQL */ `
       familyID
       points
       taskID
+      avatar
       _version
       _deleted
       _lastChangedAt
@@ -311,6 +518,7 @@ export const onDeletePerson = /* GraphQL */ `
           personID
           completed
           familyID
+          image
           _version
           _deleted
           _lastChangedAt
@@ -324,6 +532,20 @@ export const onDeletePerson = /* GraphQL */ `
         items {
           id
           taskID
+          personID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      rewards {
+        items {
+          id
+          rewardID
           personID
           _version
           _deleted
@@ -351,6 +573,7 @@ export const onCreateTask = /* GraphQL */ `
       personID
       completed
       familyID
+      image
       _version
       _deleted
       _lastChangedAt
@@ -367,6 +590,7 @@ export const onCreateTask = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -407,6 +631,7 @@ export const onUpdateTask = /* GraphQL */ `
       personID
       completed
       familyID
+      image
       _version
       _deleted
       _lastChangedAt
@@ -423,6 +648,7 @@ export const onUpdateTask = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -463,6 +689,7 @@ export const onDeleteTask = /* GraphQL */ `
       personID
       completed
       familyID
+      image
       _version
       _deleted
       _lastChangedAt
@@ -479,6 +706,7 @@ export const onDeleteTask = /* GraphQL */ `
           familyID
           points
           taskID
+          avatar
           _version
           _deleted
           _lastChangedAt
@@ -568,6 +796,7 @@ export const onCreateTaskPerson = /* GraphQL */ `
         familyID
         points
         taskID
+        avatar
         _version
         _deleted
         _lastChangedAt
@@ -578,6 +807,10 @@ export const onCreateTaskPerson = /* GraphQL */ `
           startedAt
         }
         assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
           nextToken
           startedAt
         }
@@ -594,6 +827,7 @@ export const onCreateTaskPerson = /* GraphQL */ `
         personID
         completed
         familyID
+        image
         _version
         _deleted
         _lastChangedAt
@@ -632,6 +866,7 @@ export const onUpdateTaskPerson = /* GraphQL */ `
         familyID
         points
         taskID
+        avatar
         _version
         _deleted
         _lastChangedAt
@@ -642,6 +877,10 @@ export const onUpdateTaskPerson = /* GraphQL */ `
           startedAt
         }
         assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
           nextToken
           startedAt
         }
@@ -658,6 +897,7 @@ export const onUpdateTaskPerson = /* GraphQL */ `
         personID
         completed
         familyID
+        image
         _version
         _deleted
         _lastChangedAt
@@ -696,6 +936,7 @@ export const onDeleteTaskPerson = /* GraphQL */ `
         familyID
         points
         taskID
+        avatar
         _version
         _deleted
         _lastChangedAt
@@ -706,6 +947,10 @@ export const onDeleteTaskPerson = /* GraphQL */ `
           startedAt
         }
         assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
           nextToken
           startedAt
         }
@@ -722,6 +967,7 @@ export const onDeleteTaskPerson = /* GraphQL */ `
         personID
         completed
         familyID
+        image
         _version
         _deleted
         _lastChangedAt
@@ -732,6 +978,198 @@ export const onDeleteTaskPerson = /* GraphQL */ `
           startedAt
         }
         Owner {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
+export const onCreateRewardPerson = /* GraphQL */ `
+  subscription OnCreateRewardPerson {
+    onCreateRewardPerson {
+      id
+      rewardID
+      personID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      reward {
+        id
+        title
+        description
+        value
+        expires
+        repeatable
+        repeatHour
+        claimed
+        familyID
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        RewardPeople {
+          nextToken
+          startedAt
+        }
+      }
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        points
+        taskID
+        avatar
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
+export const onUpdateRewardPerson = /* GraphQL */ `
+  subscription OnUpdateRewardPerson {
+    onUpdateRewardPerson {
+      id
+      rewardID
+      personID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      reward {
+        id
+        title
+        description
+        value
+        expires
+        repeatable
+        repeatHour
+        claimed
+        familyID
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        RewardPeople {
+          nextToken
+          startedAt
+        }
+      }
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        points
+        taskID
+        avatar
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
+export const onDeleteRewardPerson = /* GraphQL */ `
+  subscription OnDeleteRewardPerson {
+    onDeleteRewardPerson {
+      id
+      rewardID
+      personID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      reward {
+        id
+        title
+        description
+        value
+        expires
+        repeatable
+        repeatHour
+        claimed
+        familyID
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        RewardPeople {
+          nextToken
+          startedAt
+        }
+      }
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        email
+        familyID
+        points
+        taskID
+        avatar
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        ownedTasks {
+          nextToken
+          startedAt
+        }
+        assignedTasks {
+          nextToken
+          startedAt
+        }
+        rewards {
           nextToken
           startedAt
         }

@@ -6,6 +6,10 @@ import Amplify, * as AmplifyModules from 'aws-amplify'
 import { AmplifyPlugin } from 'aws-amplify-vue'
 import aws_exports from './aws-exports'
 import Vuelidate from 'vuelidate'
+import draggable from 'vuedraggable'
+
+import "./assets/app.scss"
+
 
 Amplify.configure(aws_exports);
 
@@ -21,7 +25,12 @@ import Protected from './components/Protected.vue'
 import Profile from './components/Profile.vue'
 import Tasks from './components/Tasks.vue'
 import Family from './components/Family.vue'
+import Rewards from './components/Rewards.vue'
+import editRewards from './components/editRewards.vue'
+import showRewards from './components/showRewards.vue'
 import myCalendar from './components/Calendar.vue'
+import Dashboard from "./components/views/Dashboard.vue"
+import TaskBoard from "./components/views/TaskBoard.vue"
 
 //PrimeVUE
 import PrimeVue from 'primevue/config';
@@ -213,6 +222,18 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import 'primevue/resources/themes/nova/theme.css';
 
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
+
+
+
+// // Add the rules you need.
+
+// // Merge the messages.
+
+// install the plugin
+
+
 
 
 
@@ -229,6 +250,12 @@ const routes = [
   { path: '/tasks', component: Tasks, meta: { requiresAuth: true} },
   { path: '/family', component: Family, meta: { requiresAuth: true} },
   { path: '/calendar', component: myCalendar, meta: { requiresAuth: true} },
+  { path: '/rewards', component: Rewards, meta: { requiresAuth: true} },
+  { path: '/editRewards', component: editRewards, meta: { requiresAuth: true} },
+  { path: '/showRewards', component: showRewards, meta: { requiresAuth: true} },
+  { path: "/dashboard", name: "dashboard", component: Dashboard },
+  { path: "/boards/:id", name: "task-board",component: TaskBoard },
+
 ]
 
 // router definition
@@ -279,5 +306,9 @@ router.beforeEach(function (to, from, next) {
 new Vue({
   render: v => v(App),
   router: router,
+  components: {
+      draggable,
+  },
+
   store
 }).$mount('#app')

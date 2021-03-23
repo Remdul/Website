@@ -7,10 +7,14 @@
         <router-link to="/home" class='link'>Home</router-link>
         <router-link class='link' to="/family" v-if="isAuthenticated">My Family</router-link>
         <router-link class='link' to="/tasks" v-if="isAuthenticated">Tasks</router-link>
+        <router-link class='link' to="/rewards" v-if="isAuthenticated">Rewards</router-link>
         <router-link class='link' to="/calendar" v-if="isAuthenticated">Calendar</router-link>
         <router-link class='link' to="/" v-if="!isAuthenticated">Sign In</router-link>
         <router-link class='link' to="/profile" v-if="isAuthenticated">Profile</router-link>
         <p class='link' v-on:click="signOut" v-if="isAuthenticated">Sign Out</p>
+        <router-link class='link' to="/dashboard" v-if="isAuthenticated">Dashboard</router-link>
+        <router-link class='link' to="/task-board" v-if="isAuthenticated">Taskboard</router-link>
+
       </div>
     </div>
     <router-view></router-view>
@@ -18,6 +22,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 
 export default {
   async beforeCreate() {
@@ -29,11 +34,18 @@ export default {
     } catch (err) {
       //console.log('error: ', err)
     }
+    this.$store.dispatch("fetchData")
+
   },
   computed: {
     isAuthenticated () {
       return this.$store.state.isAuthenticated
     },
+    ...mapGetters({
+      isLoading: "isLoading"
+    }),
+  
+  
   },
   methods: {
     async signOut() {
