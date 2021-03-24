@@ -222,7 +222,6 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import 'primevue/resources/themes/nova/theme.css';
 
-import VeeValidate from 'vee-validate';
 Vue.use(draggable)
 
 

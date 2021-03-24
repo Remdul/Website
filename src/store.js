@@ -1,9 +1,9 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import { API, Auth } from 'aws-amplify';
-import { listTasks, getPerson } from './graphql/queries';
+//import { API, Auth } from 'aws-amplify';
+//import { listTasks, getPerson } from './graphql/queries';
 
-import axios from "axios"
+//import axios from "axios"
 
 Vue.use(Vuex)
 
