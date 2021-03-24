@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Reward": {
-            "name": "Reward",
+        "Family": {
+            "name": "Family",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,101 +10,50 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "title": {
-                    "name": "title",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "description": {
-                    "name": "description",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "value": {
-                    "name": "value",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "expires": {
-                    "name": "expires",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "RewardPeople": {
-                    "name": "RewardPeople",
+                "People": {
+                    "name": "People",
                     "isArray": true,
                     "type": {
-                        "model": "RewardPerson"
+                        "model": "Person"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "reward"
+                        "associatedWith": "familyID"
                     }
                 },
-                "repeatable": {
-                    "name": "repeatable",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "repeatHour": {
-                    "name": "repeatHour",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "claimed": {
-                    "name": "claimed",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "familyID": {
-                    "name": "familyID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "image": {
-                    "name": "image",
+                "familyName": {
+                    "name": "familyName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "Tasks": {
+                    "name": "Tasks",
+                    "isArray": true,
+                    "type": {
+                        "model": "Task"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "familyID"
+                    }
                 }
             },
             "syncable": true,
-            "pluralName": "Rewards",
+            "pluralName": "Families",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "key",
-                    "properties": {
-                        "name": "byFamily",
-                        "fields": [
-                            "familyID"
-                        ]
-                    }
-                },
-                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -115,124 +64,9 @@ export const schema = {
                                 "operations": [
                                     "read",
                                     "create",
-                                    "update",
-                                    "delete"
+                                    "update"
                                 ],
                                 "identityClaim": "cognito:username"
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "delete",
-                                    "update"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "RewardPerson": {
-            "name": "RewardPerson",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "reward": {
-                    "name": "reward",
-                    "isArray": false,
-                    "type": {
-                        "model": "Reward"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "rewardID"
-                    }
-                },
-                "person": {
-                    "name": "person",
-                    "isArray": false,
-                    "type": {
-                        "model": "Person"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "personID"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "RewardPeople",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {
-                        "queries": null
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byReward",
-                        "fields": [
-                            "rewardID",
-                            "personID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPerson",
-                        "fields": [
-                            "personID",
-                            "rewardID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ],
-                                "identityClaim": "cognito:username"
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "delete",
-                                    "update"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ]
                             }
                         ]
                     }
@@ -330,27 +164,6 @@ export const schema = {
                     "name": "taskID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "rewards": {
-                    "name": "rewards",
-                    "isArray": true,
-                    "type": {
-                        "model": "RewardPerson"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "person"
-                    }
-                },
-                "avatar": {
-                    "name": "avatar",
-                    "isArray": false,
-                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 }
@@ -612,13 +425,6 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "image": {
-                    "name": "image",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -675,108 +481,6 @@ export const schema = {
                 }
             ]
         },
-        "Family": {
-            "name": "Family",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "People": {
-                    "name": "People",
-                    "isArray": true,
-                    "type": {
-                        "model": "Person"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "familyID"
-                    }
-                },
-                "familyName": {
-                    "name": "familyName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Tasks": {
-                    "name": "Tasks",
-                    "isArray": true,
-                    "type": {
-                        "model": "Task"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "familyID"
-                    }
-                },
-                "Rewards": {
-                    "name": "Rewards",
-                    "isArray": true,
-                    "type": {
-                        "model": "Reward"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "familyID"
-                    }
-                },
-                "avata": {
-                    "name": "avata",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "Families",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update"
-                                ],
-                                "identityClaim": "cognito:username"
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "PrivateNote": {
             "name": "PrivateNote",
             "fields": {
@@ -826,5 +530,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "734092ee8fd6e317544c1c5d65dd8810"
+    "version": "ede12bc775e05b04aa7d0c17696ff56f"
 };

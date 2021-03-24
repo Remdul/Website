@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "vueauth2d2c6134_identitypool_2d2c6134",
+    "identityPoolName": "familyc2c9c83097_identitypool_c9c83097",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "vueaut2d2c6134",
-    "userPoolName": "vueauth2d2c6134_userpool_2d2c6134",
+    "resourceNameTruncated": "familyc9c83097",
+    "userPoolName": "familyc2c9c83097_userpool_c9c83097",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,7 +20,7 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientGenerateSecret": true,
+    "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
         "email"
@@ -28,9 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "vueaut2d2c6134_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "familyc9c83097_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "vueauth2d2c6134",
+    "sharedId": "c9c83097",
+    "resourceName": "familyc2c9c83097",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -45,5 +46,13 @@
         ]
     },
     "useDefault": "default",
+    "triggers": "{}",
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "usernameCaseSensitive": false,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

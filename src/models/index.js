@@ -4,14 +4,12 @@ import { schema } from './schema';
 
 
 
-const { Reward, RewardPerson, Person, TaskPerson, Task, Family, PrivateNote } = initSchema(schema);
+const { Family, Person, TaskPerson, Task, PrivateNote } = initSchema(schema);
 
 export {
-  Reward,
-  RewardPerson,
+  Family,
   Person,
   TaskPerson,
   Task,
-  Family,
   PrivateNote
 };

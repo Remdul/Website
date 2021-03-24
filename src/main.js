@@ -223,8 +223,7 @@ import 'primeicons/primeicons.css';
 import 'primevue/resources/themes/nova/theme.css';
 
 import VeeValidate from 'vee-validate';
-Vue.use(VeeValidate);
-
+Vue.use(draggable)
 
 
 // // Add the rules you need.
@@ -306,9 +305,7 @@ router.beforeEach(function (to, from, next) {
 new Vue({
   render: v => v(App),
   router: router,
-  components: {
-      draggable,
-  },
+
 
   store
 }).$mount('#app')

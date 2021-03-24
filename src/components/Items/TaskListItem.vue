@@ -20,7 +20,7 @@
             data-vv-as="Item Details"
             placeholder="Your item description"
           ></textarea>
-          <small class="text-danger">{{ errors.first("itemDetails") }}</small>
+
         </div>
 
         <div :class="[isNewItem ? 'text-center' : 'd-flex justify-content-between', 'form-group']">

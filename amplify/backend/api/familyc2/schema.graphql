@@ -74,4 +74,3 @@ type RewardPerson @model(queries: null) @key(name: "byReward", fields: ["rewardI
   reward: Reward! @connection(fields: ["rewardID"])
   person: Person! @connection(fields: ["personID"])
 }
- 

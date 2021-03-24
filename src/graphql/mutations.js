@@ -1,88 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const deleteFamily = /* GraphQL */ `
-  mutation DeleteFamily(
-    $input: DeleteFamilyInput!
-    $condition: ModelFamilyConditionInput
-  ) {
-    deleteFamily(input: $input, condition: $condition) {
-      id
-      familyName
-      avata
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      Rewards {
-        items {
-          id
-          title
-          description
-          value
-          expires
-          repeatable
-          repeatHour
-          claimed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      People {
-        items {
-          id
-          userName
-          firstName
-          lastName
-          phoneNumber
-          email
-          familyID
-          points
-          taskID
-          avatar
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      Tasks {
-        items {
-          id
-          title
-          description
-          status
-          value
-          repeatable
-          endTime
-          repeatHours
-          personID
-          completed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
 export const createReward = /* GraphQL */ `
   mutation CreateReward(
     $input: CreateRewardInput!
@@ -94,30 +12,25 @@ export const createReward = /* GraphQL */ `
       description
       value
       expires
-      repeatable
-      repeatHour
-      claimed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       RewardPeople {
         items {
           id
           rewardID
           personID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -132,30 +45,25 @@ export const updateReward = /* GraphQL */ `
       description
       value
       expires
-      repeatable
-      repeatHour
-      claimed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       RewardPeople {
         items {
           id
           rewardID
           personID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -170,30 +78,25 @@ export const deleteReward = /* GraphQL */ `
       description
       value
       expires
-      repeatable
-      repeatHour
-      claimed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       RewardPeople {
         items {
           id
           rewardID
           personID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -204,34 +107,6 @@ export const createFamily = /* GraphQL */ `
   ) {
     createFamily(input: $input, condition: $condition) {
       id
-      familyName
-      avata
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      Rewards {
-        items {
-          id
-          title
-          description
-          value
-          expires
-          repeatable
-          repeatHour
-          claimed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
       People {
         items {
           id
@@ -244,15 +119,12 @@ export const createFamily = /* GraphQL */ `
           points
           taskID
           avatar
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
+      familyName
       Tasks {
         items {
           id
@@ -267,15 +139,34 @@ export const createFamily = /* GraphQL */ `
           completed
           familyID
           image
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      avata
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -286,34 +177,6 @@ export const updateFamily = /* GraphQL */ `
   ) {
     updateFamily(input: $input, condition: $condition) {
       id
-      familyName
-      avata
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      Rewards {
-        items {
-          id
-          title
-          description
-          value
-          expires
-          repeatable
-          repeatHour
-          claimed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
       People {
         items {
           id
@@ -326,15 +189,12 @@ export const updateFamily = /* GraphQL */ `
           points
           taskID
           avatar
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
+      familyName
       Tasks {
         items {
           id
@@ -349,15 +209,104 @@ export const updateFamily = /* GraphQL */ `
           completed
           familyID
           image
-          _version
-          _deleted
-          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      avata
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteFamily = /* GraphQL */ `
+  mutation DeleteFamily(
+    $input: DeleteFamilyInput!
+    $condition: ModelFamilyConditionInput
+  ) {
+    deleteFamily(input: $input, condition: $condition) {
+      id
+      People {
+        items {
+          id
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          avatar
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
+      familyName
+      Tasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          completed
+          familyID
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      avata
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -372,16 +321,20 @@ export const createPerson = /* GraphQL */ `
       firstName
       lastName
       phoneNumber
+      assignedTasks {
+        items {
+          id
+          taskID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       email
       familyID
       points
-      taskID
-      avatar
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       ownedTasks {
         items {
           id
@@ -396,43 +349,27 @@ export const createPerson = /* GraphQL */ `
           completed
           familyID
           image
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
-      assignedTasks {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      taskID
       rewards {
         items {
           id
           rewardID
           personID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      avatar
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -447,16 +384,20 @@ export const updatePerson = /* GraphQL */ `
       firstName
       lastName
       phoneNumber
+      assignedTasks {
+        items {
+          id
+          taskID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       email
       familyID
       points
-      taskID
-      avatar
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       ownedTasks {
         items {
           id
@@ -471,43 +412,27 @@ export const updatePerson = /* GraphQL */ `
           completed
           familyID
           image
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
-      assignedTasks {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      taskID
       rewards {
         items {
           id
           rewardID
           personID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      avatar
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -522,16 +447,20 @@ export const deletePerson = /* GraphQL */ `
       firstName
       lastName
       phoneNumber
+      assignedTasks {
+        items {
+          id
+          taskID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       email
       familyID
       points
-      taskID
-      avatar
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       ownedTasks {
         items {
           id
@@ -546,43 +475,27 @@ export const deletePerson = /* GraphQL */ `
           completed
           familyID
           image
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
-      assignedTasks {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      taskID
       rewards {
         items {
           id
           rewardID
           personID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      avatar
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -597,18 +510,21 @@ export const createTask = /* GraphQL */ `
       description
       status
       value
+      Owner {
+        items {
+          id
+          taskID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       repeatable
       endTime
       repeatHours
       personID
-      completed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       AssignedTo {
         items {
           id
@@ -621,29 +537,17 @@ export const createTask = /* GraphQL */ `
           points
           taskID
           avatar
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
-      Owner {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      completed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -658,18 +562,21 @@ export const updateTask = /* GraphQL */ `
       description
       status
       value
+      Owner {
+        items {
+          id
+          taskID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       repeatable
       endTime
       repeatHours
       personID
-      completed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       AssignedTo {
         items {
           id
@@ -682,29 +589,17 @@ export const updateTask = /* GraphQL */ `
           points
           taskID
           avatar
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
-      Owner {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      completed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -719,18 +614,21 @@ export const deleteTask = /* GraphQL */ `
       description
       status
       value
+      Owner {
+        items {
+          id
+          taskID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       repeatable
       endTime
       repeatHours
       personID
-      completed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       AssignedTo {
         items {
           id
@@ -743,29 +641,17 @@ export const deleteTask = /* GraphQL */ `
           points
           taskID
           avatar
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
-      Owner {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      completed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -777,9 +663,6 @@ export const createPrivateNote = /* GraphQL */ `
     createPrivateNote(input: $input, condition: $condition) {
       id
       content
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -794,9 +677,6 @@ export const updatePrivateNote = /* GraphQL */ `
     updatePrivateNote(input: $input, condition: $condition) {
       id
       content
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -811,9 +691,6 @@ export const deletePrivateNote = /* GraphQL */ `
     deletePrivateNote(input: $input, condition: $condition) {
       id
       content
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -829,67 +706,55 @@ export const createTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      person {
-        id
-        userName
-        firstName
-        lastName
-        phoneNumber
-        email
-        familyID
-        points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        ownedTasks {
-          nextToken
-          startedAt
-        }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
-        rewards {
-          nextToken
-          startedAt
-        }
-      }
       task {
         id
         title
         description
         status
         value
+        Owner {
+          nextToken
+        }
         repeatable
         endTime
         repeatHours
         personID
+        AssignedTo {
+          nextToken
+        }
         completed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        AssignedTo {
-          nextToken
-          startedAt
-        }
-        Owner {
-          nextToken
-          startedAt
-        }
+        owner
       }
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        assignedTasks {
+          nextToken
+        }
+        email
+        familyID
+        points
+        ownedTasks {
+          nextToken
+        }
+        taskID
+        rewards {
+          nextToken
+        }
+        avatar
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -902,67 +767,55 @@ export const updateTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      person {
-        id
-        userName
-        firstName
-        lastName
-        phoneNumber
-        email
-        familyID
-        points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        ownedTasks {
-          nextToken
-          startedAt
-        }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
-        rewards {
-          nextToken
-          startedAt
-        }
-      }
       task {
         id
         title
         description
         status
         value
+        Owner {
+          nextToken
+        }
         repeatable
         endTime
         repeatHours
         personID
+        AssignedTo {
+          nextToken
+        }
         completed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        AssignedTo {
-          nextToken
-          startedAt
-        }
-        Owner {
-          nextToken
-          startedAt
-        }
+        owner
       }
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        assignedTasks {
+          nextToken
+        }
+        email
+        familyID
+        points
+        ownedTasks {
+          nextToken
+        }
+        taskID
+        rewards {
+          nextToken
+        }
+        avatar
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -975,67 +828,55 @@ export const deleteTaskPerson = /* GraphQL */ `
       id
       taskID
       personID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      person {
-        id
-        userName
-        firstName
-        lastName
-        phoneNumber
-        email
-        familyID
-        points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        ownedTasks {
-          nextToken
-          startedAt
-        }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
-        rewards {
-          nextToken
-          startedAt
-        }
-      }
       task {
         id
         title
         description
         status
         value
+        Owner {
+          nextToken
+        }
         repeatable
         endTime
         repeatHours
         personID
+        AssignedTo {
+          nextToken
+        }
         completed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        AssignedTo {
-          nextToken
-          startedAt
-        }
-        Owner {
-          nextToken
-          startedAt
-        }
+        owner
       }
+      person {
+        id
+        userName
+        firstName
+        lastName
+        phoneNumber
+        assignedTasks {
+          nextToken
+        }
+        email
+        familyID
+        points
+        ownedTasks {
+          nextToken
+        }
+        taskID
+        rewards {
+          nextToken
+        }
+        avatar
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -1048,31 +889,23 @@ export const createRewardPerson = /* GraphQL */ `
       id
       rewardID
       personID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       reward {
         id
         title
         description
         value
         expires
+        RewardPeople {
+          nextToken
+        }
         repeatable
         repeatHour
         claimed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        RewardPeople {
-          nextToken
-          startedAt
-        }
+        owner
       }
       person {
         id
@@ -1080,29 +913,26 @@ export const createRewardPerson = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
+        assignedTasks {
+          nextToken
+        }
         email
         familyID
         points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
         ownedTasks {
           nextToken
-          startedAt
         }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
+        taskID
         rewards {
           nextToken
-          startedAt
         }
+        avatar
+        createdAt
+        updatedAt
       }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -1115,31 +945,23 @@ export const updateRewardPerson = /* GraphQL */ `
       id
       rewardID
       personID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       reward {
         id
         title
         description
         value
         expires
+        RewardPeople {
+          nextToken
+        }
         repeatable
         repeatHour
         claimed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        RewardPeople {
-          nextToken
-          startedAt
-        }
+        owner
       }
       person {
         id
@@ -1147,29 +969,26 @@ export const updateRewardPerson = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
+        assignedTasks {
+          nextToken
+        }
         email
         familyID
         points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
         ownedTasks {
           nextToken
-          startedAt
         }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
+        taskID
         rewards {
           nextToken
-          startedAt
         }
+        avatar
+        createdAt
+        updatedAt
       }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -1182,31 +1001,23 @@ export const deleteRewardPerson = /* GraphQL */ `
       id
       rewardID
       personID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       reward {
         id
         title
         description
         value
         expires
+        RewardPeople {
+          nextToken
+        }
         repeatable
         repeatHour
         claimed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        RewardPeople {
-          nextToken
-          startedAt
-        }
+        owner
       }
       person {
         id
@@ -1214,29 +1025,26 @@ export const deleteRewardPerson = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
+        assignedTasks {
+          nextToken
+        }
         email
         familyID
         points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
         ownedTasks {
           nextToken
-          startedAt
         }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
+        taskID
         rewards {
           nextToken
-          startedAt
         }
+        avatar
+        createdAt
+        updatedAt
       }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

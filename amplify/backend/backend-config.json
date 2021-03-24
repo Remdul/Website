@@ -1,9 +1,10 @@
 {
   "auth": {
-    "vueauth2d2c6134": {
+    "familyc2c9c83097": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "dependsOn": [],
+      "customAuth": false
     }
   },
   "api": {
@@ -15,20 +16,16 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authvueauth2d2c6134_userpool_2d2c6134"
+              "userPoolId": "authfamilyc2c9c83097"
             }
           },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ]
+          "additionalAuthenticationProviders": []
         }
       }
     }
   },
   "storage": {
-    "familyc2Store": {
+    "FamilyC2Storage": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
     }

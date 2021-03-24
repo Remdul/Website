@@ -1,6 +1,36 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getReward = /* GraphQL */ `
+  query GetReward($id: ID!) {
+    getReward(id: $id) {
+      id
+      title
+      description
+      value
+      expires
+      RewardPeople {
+        items {
+          id
+          rewardID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      repeatable
+      repeatHour
+      claimed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const listRewards = /* GraphQL */ `
   query ListRewards(
     $filter: ModelRewardFilterInput
@@ -14,97 +44,19 @@ export const listRewards = /* GraphQL */ `
         description
         value
         expires
+        RewardPeople {
+          nextToken
+        }
         repeatable
         repeatHour
         claimed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        RewardPeople {
-          nextToken
-          startedAt
-        }
+        owner
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const getReward = /* GraphQL */ `
-  query GetReward($id: ID!) {
-    getReward(id: $id) {
-      id
-      title
-      description
-      value
-      expires
-      repeatable
-      repeatHour
-      claimed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      RewardPeople {
-        items {
-          id
-          rewardID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const syncRewards = /* GraphQL */ `
-  query SyncRewards(
-    $filter: ModelRewardFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncRewards(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        description
-        value
-        expires
-        repeatable
-        repeatHour
-        claimed
-        familyID
-        image
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        RewardPeople {
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -112,34 +64,6 @@ export const getFamily = /* GraphQL */ `
   query GetFamily($id: ID!) {
     getFamily(id: $id) {
       id
-      familyName
-      avata
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      Rewards {
-        items {
-          id
-          title
-          description
-          value
-          expires
-          repeatable
-          repeatHour
-          claimed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
       People {
         items {
           id
@@ -152,15 +76,12 @@ export const getFamily = /* GraphQL */ `
           points
           taskID
           avatar
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
+      familyName
       Tasks {
         items {
           id
@@ -175,15 +96,34 @@ export const getFamily = /* GraphQL */ `
           completed
           familyID
           image
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
+      Rewards {
+        items {
+          id
+          title
+          description
+          value
+          expires
+          repeatable
+          repeatHour
+          claimed
+          familyID
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      avata
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -196,68 +136,82 @@ export const listFamilys = /* GraphQL */ `
     listFamilys(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        familyName
-        avata
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        Rewards {
-          nextToken
-          startedAt
-        }
         People {
           nextToken
-          startedAt
         }
+        familyName
         Tasks {
           nextToken
-          startedAt
         }
+        Rewards {
+          nextToken
+        }
+        avata
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
-      startedAt
     }
   }
 `;
-export const syncFamilies = /* GraphQL */ `
-  query SyncFamilies(
-    $filter: ModelFamilyFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncFamilies(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        familyName
-        avata
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        Rewards {
-          nextToken
-          startedAt
+export const getPerson = /* GraphQL */ `
+  query GetPerson($id: ID!) {
+    getPerson(id: $id) {
+      id
+      userName
+      firstName
+      lastName
+      phoneNumber
+      assignedTasks {
+        items {
+          id
+          taskID
+          personID
+          createdAt
+          updatedAt
+          owner
         }
-        People {
-          nextToken
-          startedAt
-        }
-        Tasks {
-          nextToken
-          startedAt
-        }
+        nextToken
       }
-      nextToken
-      startedAt
+      email
+      familyID
+      points
+      ownedTasks {
+        items {
+          id
+          title
+          description
+          status
+          value
+          repeatable
+          endTime
+          repeatHours
+          personID
+          completed
+          familyID
+          image
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      taskID
+      rewards {
+        items {
+          id
+          rewardID
+          personID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      avatar
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -274,150 +228,73 @@ export const listPersons = /* GraphQL */ `
         firstName
         lastName
         phoneNumber
+        assignedTasks {
+          nextToken
+        }
         email
         familyID
         points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
         ownedTasks {
           nextToken
-          startedAt
         }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
+        taskID
         rewards {
           nextToken
-          startedAt
         }
+        avatar
+        createdAt
+        updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
-export const getPerson = /* GraphQL */ `
-  query GetPerson($id: ID!) {
-    getPerson(id: $id) {
+export const getTask = /* GraphQL */ `
+  query GetTask($id: ID!) {
+    getTask(id: $id) {
       id
-      userName
-      firstName
-      lastName
-      phoneNumber
-      email
-      familyID
-      points
-      taskID
-      avatar
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      ownedTasks {
-        items {
-          id
-          title
-          description
-          status
-          value
-          repeatable
-          endTime
-          repeatHours
-          personID
-          completed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      assignedTasks {
+      title
+      description
+      status
+      value
+      Owner {
         items {
           id
           taskID
           personID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
+          owner
         }
         nextToken
-        startedAt
       }
-      rewards {
+      repeatable
+      endTime
+      repeatHours
+      personID
+      AssignedTo {
         items {
           id
-          rewardID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
+          userName
+          firstName
+          lastName
+          phoneNumber
+          email
+          familyID
+          points
+          taskID
+          avatar
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
-    }
-  }
-`;
-export const syncPeople = /* GraphQL */ `
-  query SyncPeople(
-    $filter: ModelPersonFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPeople(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userName
-        firstName
-        lastName
-        phoneNumber
-        email
-        familyID
-        points
-        taskID
-        avatar
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        ownedTasks {
-          nextToken
-          startedAt
-        }
-        assignedTasks {
-          nextToken
-          startedAt
-        }
-        rewards {
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
+      completed
+      familyID
+      image
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
@@ -434,132 +311,24 @@ export const listTasks = /* GraphQL */ `
         description
         status
         value
+        Owner {
+          nextToken
+        }
         repeatable
         endTime
         repeatHours
         personID
+        AssignedTo {
+          nextToken
+        }
         completed
         familyID
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
-        AssignedTo {
-          nextToken
-          startedAt
-        }
-        Owner {
-          nextToken
-          startedAt
-        }
+        owner
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const getTask = /* GraphQL */ `
-  query GetTask($id: ID!) {
-    getTask(id: $id) {
-      id
-      title
-      description
-      status
-      value
-      repeatable
-      endTime
-      repeatHours
-      personID
-      completed
-      familyID
-      image
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      AssignedTo {
-        items {
-          id
-          userName
-          firstName
-          lastName
-          phoneNumber
-          email
-          familyID
-          points
-          taskID
-          avatar
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      Owner {
-        items {
-          id
-          taskID
-          personID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const syncTasks = /* GraphQL */ `
-  query SyncTasks(
-    $filter: ModelTaskFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncTasks(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        description
-        status
-        value
-        repeatable
-        endTime
-        repeatHours
-        personID
-        completed
-        familyID
-        image
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        AssignedTo {
-          nextToken
-          startedAt
-        }
-        Owner {
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -568,9 +337,6 @@ export const getPrivateNote = /* GraphQL */ `
     getPrivateNote(id: $id) {
       id
       content
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -587,169 +353,11 @@ export const listPrivateNotes = /* GraphQL */ `
       items {
         id
         content
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPrivateNotes = /* GraphQL */ `
-  query SyncPrivateNotes(
-    $filter: ModelPrivateNoteFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPrivateNotes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        content
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncTaskPeople = /* GraphQL */ `
-  query SyncTaskPeople(
-    $filter: ModelTaskPersonFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncTaskPeople(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        taskID
-        personID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        person {
-          id
-          userName
-          firstName
-          lastName
-          phoneNumber
-          email
-          familyID
-          points
-          taskID
-          avatar
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        task {
-          id
-          title
-          description
-          status
-          value
-          repeatable
-          endTime
-          repeatHours
-          personID
-          completed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncRewardPeople = /* GraphQL */ `
-  query SyncRewardPeople(
-    $filter: ModelRewardPersonFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncRewardPeople(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        rewardID
-        personID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        reward {
-          id
-          title
-          description
-          value
-          expires
-          repeatable
-          repeatHour
-          claimed
-          familyID
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        person {
-          id
-          userName
-          firstName
-          lastName
-          phoneNumber
-          email
-          familyID
-          points
-          taskID
-          avatar
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-      startedAt
     }
   }
 `;
