@@ -30,7 +30,9 @@
 
 
 <template>
-  <amplify-s3-image path="public/" img-key="slotProps.data.image" />
+  
+  <amplify-s3-image imagePath="slotProps.data.image" />
+
 </template>  
 
 
@@ -66,14 +68,18 @@
                </div>
                <div class="p-field p-col">
                   <div v-if="!task.image">
-                     <h2>Upload a Photo</h2>
+                     <h3>Upload a Photo</h3>
                      <input type="file" @change="onUpload">
                   </div>
                   <div v-else>
-                     <amplify-s3-image level="protected" path="public/" :img-key="task.image" class="w-4/12" />
-                     <amplify-s3-album path="public/" />
+                     <amplify-s3-image level="protected" :img-key="task.image" class="w-4/12" />
+
                      <input type="file" @change="onUpload">
                   </div>
+               </div>
+               <div class="p-field p-row">
+                   <h3>Assign To:</h3>
+                   <Dropdown v-model="assignedTo" :options="familyMembers" optionLabel="userName" placeholder="Select a Family Member" />
                </div>
             </div>
             <template #footer>
@@ -122,7 +128,7 @@
 <script>
 import { API, Auth, Storage } from 'aws-amplify';
 import { createTask, deleteTask, updateTask, updatePerson } from '../graphql/mutations';
-import { listTasks, getPerson } from '../graphql/queries';
+import { listTasks, getPerson, getFamily } from '../graphql/queries';
 
 
 
@@ -155,6 +161,8 @@ export default {
       currentUserID: null,
       image: null,
       showImage: null,
+      familyMembers: null,
+      assignedTo: null,
     }
   },
 
@@ -168,6 +176,8 @@ export default {
     },
     
     async getTodos() {
+      this.familyMembers = null
+        
       const { attributes } = await Auth.currentUserInfo();
       
       this.currentUserID = attributes.sub;
@@ -176,12 +186,22 @@ export default {
         variables: {id: this.currentUserID },
       });
       this.familyID = this.currentUser.data.getPerson.familyID;
-
+      
       const todos = await API.graphql({
         query: listTasks
       });
       
       this.tasks = todos.data.listTasks.items.filter(item => item._deleted !== true && item.completed !== true && item.familyID === this.familyID);
+
+      const family = await API.graphql({
+        query: getFamily,
+        variables: {id: this.familyID },
+      });
+      
+      for (var i = 0; i < family.data.getFamily.People.items.length; i++){
+          console.log("I: ", family.data.getFamily.People.items[i])
+          this.familyMembers += family.data.getFamily.People.items[i]
+      }
     },
   
     openNew() {
@@ -212,7 +232,6 @@ export default {
           console.log('Error uploading file: ', err);
         }
       }
-      console.log("NEWFILE: ", newFile)
       return newFile;
     },
 
@@ -221,24 +240,21 @@ export default {
       if (this.task.title.trim()) {
         if (this.task.id) {
           const newFile = await this.saveImage();
-          console.log("Existing Task Save")
-          
           const taskDetails = {
             id: this.task.id,
             title: this.task.title.trim(),
             description: this.task.description.trim(),
             value: Number(this.task.value),
             completed: false,
-            _version: Number(this.task._version),
+            //_version: Number(this.task._version),
             familyID: this.familyID,
             image: newFile.key,
           };
           
-          const exTask = await API.graphql({
+          await API.graphql({
             query: updateTask,
             variables: { input: taskDetails },
           });
-          console.log ("ExTask: ", exTask)
 
           this.$set(this.tasks, this.findIndexById(this.task.id), this.task);
           this.getTodos();
@@ -247,24 +263,20 @@ export default {
         else {
           console.log("New Task Save")
           const newFile = await this.saveImage();
-          
           const taskDetails = {
             id: this.createId,
             title: this.task.title.trim(),
             description: this.task.description.trim(),
             value: Number(this.task.value),
             completed: false,
-            _version: 0,
+            //_version: 0,
             familyID: this.familyID,            
             image: newFile.key,
           };
-          console.log("THISKEY: ", taskDetails.image)
-          const newTask = await API.graphql({
+          await API.graphql({
             query: createTask,
             variables: { input: taskDetails },
           });
-          
-          console.log ("NewTask: ", newTask)          
           this.tasks.push(this.task);
           this.getTodos();
           this.$toast.add({severity:'success', summary: 'Successful', detail: 'Task Created', life: 3000});

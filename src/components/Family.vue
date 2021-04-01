@@ -100,7 +100,7 @@ export default {
       const { attributes } = await Auth.currentUserInfo();
       const familyInformation = {
         id: this.createId,
-        _version: 0,
+        //_version: 0,
         familyName: this.familyName,
       }
       
